@@ -8,8 +8,7 @@ signInWithRedirect(auth, provider)
 .then((result:any) => {
 console.log("sign in successful result  === ",result)
 // The signed-in user info.
-    const user = result.user;
-  }).catch((error) => {
+}).catch((error) => {
 // Handle Errors here.
 console.log("sign in error  === ",error)
 

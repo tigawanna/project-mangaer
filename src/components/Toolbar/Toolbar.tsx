@@ -18,13 +18,13 @@ return (
  <div className='w-full bg-slate-500 h-16'>
 <IconContext.Provider value={{ size: "25px", className: "table-edit-icons" }} >
  <div className='flex flex-grow flex-3'>
-<div className='m-1 w-full p-3 bg-slate-800'>
+     <div className='m-1 w-full p-3 bg-slate-800 flex-center'>
      <Link to="/"><GrHome /></Link>
      </div>
-     <div className='m-1 w-full p-3 bg-slate-600'>
+     <div className='m-1 w-full p-3 bg-slate-600 flex-center'>
      <Link to="/project">Project</Link>
      </div>
-     <div className='m-1 w-fit p-3 bg-slate-700'>
+     <div className='m-1 w-fit p-3 bg-slate-700 flex-center'>
       {!user?<FaUserCircle />
        :<img  
     //   @ts-ignore 

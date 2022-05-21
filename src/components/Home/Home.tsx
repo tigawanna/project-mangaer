@@ -1,7 +1,8 @@
+import { User } from 'firebase/auth';
 import React from 'react'
 
 interface HomeProps {
-
+user?:User|null
 }
 
 export const Home: React.FC<HomeProps> = () => {
