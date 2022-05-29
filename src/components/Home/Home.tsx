@@ -14,7 +14,7 @@ user?:User|null
 
 
 export const Home: React.FC<HomeProps> = () => {
-  const googleLogin = httpsCallable(functions, 'redirect');
+  const googleLogin = httpsCallable(functions, 'googleLogin');
 
 
 return (

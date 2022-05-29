@@ -8,14 +8,6 @@ admin.initializeApp();
 
 
 
-exports.redirect = functions.https.onRequest((req, res) => {
-  console.log(req.headers)
-  // This will eventually redirect to a store URL based on the phone in user-agent
-  const url='http://localhost:3000/task'
-  res.send(`<a href=${url}> signIn </a>`)
-
-});
-
 exports.googleLogin = functions.https.onRequest((request, response) => {
   const SCOPES = [
   "https://www.googleapis.com/auth/userinfo.email",
@@ -37,8 +29,7 @@ exports.googleLogin = functions.https.onRequest((request, response) => {
     login_hint: request.query.email_address || '',
   });
   response.set('Cache-Control', 'private, max-age=0, s-maxage=0');
-  console.log("called auth request  ===== ",authUrl)
-  response.redirect(authUrl);
+ response.redirect(authUrl);
 });
 
 
