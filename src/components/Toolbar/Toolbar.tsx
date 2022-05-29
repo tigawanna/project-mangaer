@@ -6,12 +6,20 @@ import { FaUserCircle } from 'react-icons/fa';
 import { useAuthSignOut} from '@react-query-firebase/auth';
 import { auth } from '../../firebase/firebaseConfig';
 import { User } from 'firebase/auth';
+import { useQueryClient } from 'react-query';
+
 interface ToolbarProps {
 user?:User|null
 }
 
 export const Toolbar: React.FC<ToolbarProps> = ({user}) => {
-const mutation = useAuthSignOut(auth);
+
+const queryClient = useQueryClient()   
+const mutation = useAuthSignOut(auth,{
+   onSuccess: () => {  queryClient.invalidateQueries('user')  },
+   });
+
+
 const userImg =user?.photoURL;
 const image =userImg?userImg:'https://picsum.photos/id/237/100/100'
 return (

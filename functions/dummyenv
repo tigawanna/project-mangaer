@@ -1,0 +1,6 @@
+
+rename this file to .env and add the following environment variables:
+
+CLIENT_ID="your client ID"
+CLIENT_SECRET="your client secret"
+REDIRECT_URI="http://localhost:5001/oauthCallback"

@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { ProjectsForm } from './ProjectForm';
 import { db } from '../../firebase/firebaseConfig';
 import { collection, query, orderBy } from "firebase/firestore";
-import { useFirestoreQuery, useFirestoreQueryData } from '@react-query-firebase/firestore';
+import { useFirestoreQueryData } from '@react-query-firebase/firestore';
 import { tyme } from './projectUtil';
 import { Projectitems } from './ProjectListItems';
 import { User } from 'firebase/auth';

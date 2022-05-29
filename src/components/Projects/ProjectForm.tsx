@@ -45,6 +45,7 @@ export const ProjectsForm: React.FC<ProjectsFormProps> = ({ open, setOpen,user }
     type: "",
     quotation: "",
   });
+  
   const id = uniqid();
   const ProjectRef = doc(db, "projects", id);
   const mutationProject = useFirestoreDocumentMutation(
