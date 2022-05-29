@@ -2,7 +2,7 @@ import { GoogleAuthProvider, signInWithRedirect} from "firebase/auth";
 import { auth} from "../../firebase/firebaseConfig";
 
 const provider = new GoogleAuthProvider();
-provider.addScope('https://mail.google.com/');
+// provider.addScope('https://mail.google.com/');
 
 export const loginUser= () => {
 
