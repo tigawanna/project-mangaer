@@ -1,8 +1,4 @@
 import { User} from 'firebase/auth';
-import React,{useEffect}  from 'react'
-import { getRedirectResult, GoogleAuthProvider } from "firebase/auth";
-import { auth, functions } from '../../firebase/firebaseConfig';
-import { httpsCallable } from 'firebase/functions';
 
 
 
@@ -11,23 +7,25 @@ user?:User|null
 }
 
 
-
-
-export const Home: React.FC<HomeProps> = () => {
-  const googleLogin = httpsCallable(functions, 'googleLogin');
-
+export const Home: React.FC<HomeProps> = ({user}) => {
 
 return (
- <div className='w-full min-h-full bg-slate-400 flex-center flex-col'>
-<button
-className='bg-slate-700 p-5 text-xl font-bold'
-onClick={()=>{
-  googleLogin()
-  .then((result) => { console.log("response from calling google ==== ",result)})
-  .catch((err) => { console.log("error calling google ==== ",err)})
-  }}
->click</button>
+ <div className='w-full min-h-full bg-slate-400 flex-center flex-col'> 
 
+ <div className="flex-center bg-slate-500 w-[50%]">
+ <div className="flex-center flex-col bg-slate-300 p-[5%] w-[50%] rounded">
+ <div className="flex-center text-slate-600 text-4xl font-bold w-full p-[5%]">Welcome</div>
+ <div className="flex-center text-slate-600 text-4xl font-bold p-[5%]">
+  {user?.displayName}</div>
+  {/* @ts-ignore */}
+{user?.photoURL?<img src={user?.photoURL} 
+alt="user"
+className='w-[200px] h-[200px]'
+/>:null}
+  </div>
+
+
+ </div>
  </div>
 );
 

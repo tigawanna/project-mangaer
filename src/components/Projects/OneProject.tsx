@@ -68,7 +68,7 @@ const { state } = useLocation();
     const { value } = e.target;
     setInput({ ...input, [e.target.id]: value });
   };
-console.log("theme is ",theme)
+
   const ref = doc(db, "projects", id);
   const mutation = useFirestoreDocumentMutation(ref, { merge: true });
   const updateProject = () => {
