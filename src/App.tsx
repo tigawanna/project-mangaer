@@ -9,8 +9,8 @@ import { useAuthUser } from "@react-query-firebase/auth";
 import { auth } from "./firebase/firebaseConfig";
 import { Login } from "./components/auth/Login";
 import { ProtectedRoute } from "./components/auth/PrivateRoutes";
-import { Projects } from "./components/Projects/Project";
-import { OneProject } from "./components/Projects/OneProject";
+import { Project } from './components/Projects/Project';
+
 
 function App() {
   const query = useAuthUser("user", auth);
@@ -36,20 +36,13 @@ function App() {
                 </ProtectedRoute>
               }
             />
-          <Route
-              path="/oneproject"
-              element={
-                <ProtectedRoute user={user}>
-                  <OneProject user={user}/>
-                </ProtectedRoute>
-              }
-            />
+        
 
             <Route
               path="/project"
               element={
                 <ProtectedRoute user={user}>
-                  <Projects user={user}/>
+                  <Project user={user}/>
                 </ProtectedRoute>
               }
             />
