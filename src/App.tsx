@@ -10,6 +10,7 @@ import { auth } from "./firebase/firebaseConfig";
 import { Login } from "./components/auth/Login";
 import { ProtectedRoute } from "./components/auth/PrivateRoutes";
 import { Project } from './components/Projects/Project';
+import {Shops} from "./components/Shops/Shops";
 
 
 function App() {
@@ -46,6 +47,16 @@ function App() {
                 </ProtectedRoute>
               }
             />
+
+          <Route
+              path="/shops"
+              element={
+                <ProtectedRoute user={user}>
+                  <Shops user={user}/>
+                </ProtectedRoute>
+              }
+            />
+
             {/* @ts-ignore */}
             <Route path="/login" element={<Login user={user} />} />
           </Routes>

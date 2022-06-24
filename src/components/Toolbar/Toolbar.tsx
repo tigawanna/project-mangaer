@@ -32,6 +32,9 @@ return (
      <div className='m-1 w-full p-3 bg-slate-600 flex-center'>
      <Link to="/project">Project</Link>
      </div>
+     <div className='m-1 w-full p-3 bg-slate-600 flex-center'>
+     <Link to="/shops">Shops</Link>
+     </div>
      <div className='m-1 w-fit p-3 bg-slate-700 flex-center'>
       {!user?<FaUserCircle />
        :<img  
