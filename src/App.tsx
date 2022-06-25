@@ -11,6 +11,7 @@ import { Login } from "./components/auth/Login";
 import { ProtectedRoute } from "./components/auth/PrivateRoutes";
 import { Project } from './components/Projects/Project';
 import {Shops} from "./components/Shops/Shops";
+import { ShopForm } from "./components/Shops/ShopForm/ShopForm";
 
 
 function App() {
@@ -56,6 +57,15 @@ function App() {
                 </ProtectedRoute>
               }
             />
+
+          {/* <Route
+              path="/test"
+              element={
+                <ProtectedRoute user={user}>
+                  <ShopForm user={user} floor={"ground"}/>
+                </ProtectedRoute>
+              }
+            /> */}
 
             {/* @ts-ignore */}
             <Route path="/login" element={<Login user={user} />} />

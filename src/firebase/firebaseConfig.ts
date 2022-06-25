@@ -21,7 +21,6 @@ export const firebaseConfig = {
   measurementId: `${process.env.REACT_APP_MEASUREMENT_ID}`
 }
 
-
 const app = initializeApp(firebaseConfig);
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 
@@ -29,14 +28,20 @@ export const db = getFirestore();
 export const auth = getAuth(app)
 export const functions = getFunctions(getApp());
 
-// connectFunctionsEmulator(functions, "localhost", 5001);
-// connectFirestoreEmulator(db, '192.168.43.238', 8080);
-// connectAuthEmulator(auth, "http://192.168.43.238:9099");
+//comment ou all the below code to run it on the live backend 
 
+//for use on local network :type ipconfig into powershell and replace 192.168.0.105 
+//with your  ipv4 one
 
-connectFirestoreEmulator(db, 'localhost', 8080);
-connectAuthEmulator(auth, "http://localhost:9099");
 connectFunctionsEmulator(functions, "localhost", 5001);
+connectFirestoreEmulator(db, '192.168.0.105', 8080);
+connectAuthEmulator(auth, "http://192.168.0.105:9099");
+
+//for localhost use
+
+// connectFirestoreEmulator(db, 'localhost', 8080);
+// connectAuthEmulator(auth, "http://localhost:9099");
+// connectFunctionsEmulator(functions, "localhost", 5001);
 
 
 

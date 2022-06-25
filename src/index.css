@@ -73,3 +73,12 @@
 @apply text-sm text-red-500
 
 }
+
+.shop-form-error{
+  @apply text-sm text-black 
+  
+  }
+.label-style {
+    @apply w-full font-bold text-sm flex items-center justify-start;
+  }
+  

@@ -1,29 +1,8 @@
 import dayjs  from 'dayjs';
+import { ShopFormValidate, tyme } from './types';
 
 
 
-export interface tyme{
-  nanoseconds: number,
-  seconds:number
-}
-
-
-export const dynColor=(status:string)=>{
-
-if(status==="pending"){
-    return '#e30403'
-}
-
-if(status==="approved"){
-    return '#93C5FD'
-}
-if(status==="funded"){
-    return '#34D399'
-}
-if(status==="done"){
-    return '#4C1D95'
-}
-}
 
 
 export const toTyme =(time?:tyme)=>{
@@ -51,3 +30,6 @@ export const justTym =(time:tyme|null|undefined)=>{
    return null
    
   }
+
+  
+  

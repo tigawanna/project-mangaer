@@ -5,13 +5,18 @@ import { useFirestoreQueryData } from "@react-query-firebase/firestore";
 import { useState } from "react";
 import { Shop } from "../../utils/other/types";
 import { AddShopCard, ShopCard, ShopFloor } from "./ShopCard";
+import { ShopForm } from './ShopForm/ShopForm';
+import { FaTimes } from "react-icons/fa";
+import { IconContext } from 'react-icons/lib';
 
 interface ShopsProps {
   user?: User | null;
 }
 
 export const Shops: React.FC<ShopsProps> = ({ user }) => {
-  const [floor, setFloor] = useState("first");
+  const [floor, setFloor] = useState("ground");
+  const [open, setOpen] = useState(false);
+
   const shopsRef = query(
     collection(db, "shops", floor, "shops"),
     orderBy("shopnumber", "asc"),
@@ -22,6 +27,7 @@ export const Shops: React.FC<ShopsProps> = ({ user }) => {
   const shopQuery = useFirestoreQueryData(["shops", floor], shopsRef);
   // console.log("query  ==== ",shopQuery)
   // console.log("shop query ==== ",shopQuery?.data)
+
   const data = shopQuery.data as Shop[];
   if (shopQuery.error) {
     return (
@@ -38,8 +44,7 @@ export const Shops: React.FC<ShopsProps> = ({ user }) => {
   return (
     <div className="w-full h-full flex-col">
       <div className="right-0 left-0 flex flex-wrap h-[10%]w-full ">
-
-        <div className="fixed flex h-[10%] w-full mx-1 justify-center">
+       <div className="fixed flex h-[10%] w-full mx-1 justify-center">
           {floors.map((afloor, index) => (
             <ShopFloor
               floor={afloor}
@@ -49,14 +54,19 @@ export const Shops: React.FC<ShopsProps> = ({ user }) => {
             />
           ))}
         </div>
-        
       </div>
+   {open?<div 
 
-      <div className="flex flex-wrap  w-full justify-center m-2 mt-14">
-      <AddShopCard/>
-        {data.map((shop, index) => {
-          return <ShopCard shop={shop} key={index} />;
-        })}
+   className="fixed z-40 h-full w-full bg-slate-400 bg-opacity-50 ">
+    <div className="fixed z-50  ">
+    <IconContext.Provider value={{ size: "50px", }} ><FaTimes onClick={()=>setOpen(false)}/></IconContext.Provider>
+      </div>
+    <ShopForm floor={floor} shops={data} open={open} setOpen={setOpen}/>
+    </div>:null}
+
+      <div className="flex-center  w-full  m-2 mt-14 flex-wrap">
+         <AddShopCard open={open} setOpen={setOpen}/>
+        {data.map((shop, index) =><ShopCard shop={shop} key={index} />)}
   
       </div>
     </div>
