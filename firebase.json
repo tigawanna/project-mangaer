@@ -9,15 +9,15 @@
   "emulators": {
     "auth": {
       "port": 9099,
-      "host": "192.168.0.105"
+      "host": "192.168.43.238"
     },
     "functions": {
       "port": 5001,
-      "host": "192.168.0.105"
+      "host": "192.168.43.238"
     },
     "firestore": {
       "port": 8080,
-      "host": "192.168.0.105"
+      "host": "192.168.43.238"
     },
     "ui": {
       "enabled": true

@@ -24,7 +24,6 @@ yarn-debug.log*
 yarn-error.log*
 
 
-firebase-debug.log
 
 firestore-debug.log
 firestore.indexes.json
@@ -32,7 +31,5 @@ firestore.rules
 ui-debug.log
 .firebaserc
 
+/src/firestorebackup.js
 
-src/firestorebackup.js
-
-src/firebase/firebaseConfig.ts

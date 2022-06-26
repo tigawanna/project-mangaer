@@ -1,46 +1,176 @@
-# Getting Started with Create React App
+# `PROPERTY MANAGER`
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## `Brief descrption`
+### Simple property manager to input tenants and keep track of their payments 
 
-## Available Scripts
+made with 
+- ### React with create-react-app
 
-In the project directory, you can run:
+- ### Tailwindcss for styling
 
-### `npm start`
+- ### react-query for state management and api calls
+- ### Firebase for tha backend 
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+`Getting started`
 
-### `npm test`
+clone the repo and npm install
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Create a firebase project :[firebase official docs](https://cloud.google.com/firestore/docs/client/get-firebase)
 
-### `npm run build`
+- add the firebaseConfig obect that looks something like this
+```
+const firebaseConfig = {
+      apiKey: "apikeey..................",
+      authDomain: "yurdomain.firebaseapp.com",
+      databaseURL: "https://yourdomain-default-rtdb.firebaseio.com",
+      projectId: "yourproect",
+      storageBucket: "yourproect.appspot.com",
+      messagingSenderId: "1234567890",
+      appId: "6:4500000000-9999990222222"
+    };
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+``` 
+and add it to the .env file
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+ REACT_APP_FIREBASE_API_KEY=apikeey..................
+ REACT_APP_FIREBASE_AUTH_DOMAIN=yurdomain.firebaseapp.com
+ REACT_APP_FIREBASE_DATABASE_URL=https://yourdomain-default-rtdb.firebaseio.com
+ REACT_APP_FIREBASE_PROJECT_ID=yourproject
+ REACT_APP_FIREBASE_STORAGE_BUCKET=yourproject.appspot.com
+ REACT_APP_FIREBASE_MESSAGING_SENDER_ID=1234567890
+ REACT_APP_FIREBASE_APP_ID=1::4500000000-9999990222222
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+ REACT_APP_IPV4=192.168.43.238
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+> the ipv4 address can be found by running ipconfig in your terminal,
+> i use it to test on other devices on the same local network.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+`for the firebase setup`
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+your firebase config should look like this and work if all the .env variable were set right
 
-## Learn More
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore"
+import { getAuth} from "firebase/auth";
+
+// import { connectAuthEmulator } from "firebase/auth";
+// import {connectFirestoreEmulator} from "firebase/firestore"
+// import { connectFunctionsEmulator } from "firebase/functions";
+
+import { getFunctions} from "firebase/functions";
+import { getApp } from "firebase/app";
+
+
+//USE THIS TO CHECK IF ENVS ARE ACCESSIBLE
+
+// const fireConfig=[
+//   `${process.env.REACT_APP_FIREBASE_API_KEY}`,
+//   `${process.env.REACT_APP_FIREBASE_AUTH_DOMAIN}`,
+//   `${process.env.REACT_APP_FIREBASE_DATABASE_URL}`,
+//   `${process.env.REACT_APP_FIREBASE_PROJECT_ID}`,
+//   `${process.env.REACT_APP_FIREBASE_STORAGE_BUCKET}`,
+//   `${process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID}`,
+//   `${process.env.REACT_APP_FIREBASE_APP_ID}`,
+// ]
+// console.log("project CONFIG is === ",fireConfig)
+
+const firebaseConfig = {
+  apiKey:`${process.env.REACT_APP_FIREBASE_API_KEY}`,
+  authDomain:`${process.env.REACT_APP_FIREBASE_AUTH_DOMAIN}`,
+  databaseURL:`${process.env.REACT_APP_FIREBASE_DATABASE_URL}`,
+  projectId:`${process.env.REACT_APP_FIREBASE_PROJECT_ID}`,
+  storageBucket:`${process.env.REACT_APP_FIREBASE_STORAGE_BUCKET}`,
+  messagingSenderId:`${process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID}`,
+  appId:`${process.env.REACT_APP_FIREBASE_APP_ID}`
+};
+
+
+const app = initializeApp(firebaseConfig);
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+
+export const db = getFirestore();
+export const auth = getAuth(app)
+export const functions = getFunctions(getApp());
+
+//comment ou all the below code to run it on the live backend 
+
+//for use on local network :type ipconfig into powershell and replace 192.168.0.105 
+//with your  ipv4 one
+
+
+// console.log("ipv4  ===== ",`${process.env.REACT_APP_IPV4}`)
+// const ipv4=`${process.env.REACT_APP_IPV4}` 
+
+// comment this out for locahost LAN use
+
+// connectFunctionsEmulator(functions, "localhost", 5001);
+// connectFirestoreEmulator(db,ipv4, 8080);
+// connectAuthEmulator(auth, `http://${ipv4}:9099`);
+
+
+//comment this out for localhost use
+
+// connectFirestoreEmulator(db, 'localhost', 8080);
+// connectAuthEmulator(auth, "http://localhost:9099");
+// connectFunctionsEmulator(functions, "localhost", 5001);
+
+```
+
+Testing is best done locally , and firebase emulator willhelp you in that 
+[article link](https://dev.to/tigawanna/firebase-emulator-16l2)
+
+after setting up comment out either of these
+
+```
+// connectFunctionsEmulator(functions, "localhost", 5001);
+// connectFirestoreEmulator(db,ipv4, 8080);
+// connectAuthEmulator(auth, `http://${ipv4}:9099`);
+
+
+//comment this out for localhost use
+
+// connectFirestoreEmulator(db, 'localhost', 8080);
+// connectAuthEmulator(auth, "http://localhost:9099");
+// connectFunctionsEmulator(functions, "localhost", 5001);
+
+```
+
+Change your firebase.json  to include the host variabble which is your ipv4 
+
+```
+{
+  "functions": {
+    "source": "functions"
+  },
+  "firestore": {
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
+  },
+  "emulators": {
+    "auth": {
+      "port": 9099,
+      "host": "192.168.43.238"
+    },
+    "functions": {
+      "port": 5001,
+      "host": "192.168.43.238"
+    },
+    "firestore": {
+      "port": 8080,
+      "host": "192.168.43.238"
+    },
+    "ui": {
+      "enabled": true
+    }
+  }
+}
+
+```

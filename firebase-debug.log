@@ -1,0 +1,10 @@
+[debug] [2022-06-26T11:13:22.327Z] ----------------------------------------------------------------------
+[debug] [2022-06-26T11:13:22.331Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\denni\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js emulators:start --import ./property-save
+[debug] [2022-06-26T11:13:22.333Z] CLI Version:   11.0.0
+[debug] [2022-06-26T11:13:22.333Z] Platform:      win32
+[debug] [2022-06-26T11:13:22.333Z] Node Version:  v16.15.0
+[debug] [2022-06-26T11:13:22.341Z] Time:          Sun Jun 26 2022 14:13:22 GMT+0300 (East Africa Time)
+[debug] [2022-06-26T11:13:22.341Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2022-06-26T11:13:22.479Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2022-06-26T11:13:22.480Z] > authorizing via signed-in user (denniskinuthiaw@gmail.com)
