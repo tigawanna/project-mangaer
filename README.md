@@ -188,7 +188,9 @@ use
 npx kill-port 8080
 ``` 
  the emulator loses all data after it;s stopped but you can save it by running 
- 
+
  ```
  firebase emulators:export ./property-save
  ```
+
+pull requests are welcome
