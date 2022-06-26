@@ -124,3 +124,8 @@ Java HotSpot(TM) 64-Bit Server VM (build 17+35-LTS-2724, mixed mode, sharing)
 
 Issues? Report them at https://github.com/firebase/firebase-tools/issues and attach the *-debug.log files.
  
+[warn] !  Received a signed JWT. Auth Emulator does not validate JWTs and IS NOT SECURE {"metadata":{"emulator":{"name":"auth"},"message":"Received a signed JWT. Auth Emulator does not validate JWTs and IS NOT SECURE"}}
+[debug] [2022-06-26T19:23:58.035Z] >>> [apiv2][query] POST http://192.168.43.238:5001/functions/projects/netninjaprojects/trigger_multicast [none]
+[debug] [2022-06-26T19:23:58.036Z] >>> [apiv2][body] POST http://192.168.43.238:5001/functions/projects/netninjaprojects/trigger_multicast {"eventId":"f6b23670-d0a2-449c-b82f-dd895409b733","eventType":"providers/firebase.auth/eventTypes/user.create","resource":{"name":"projects/netninjaprojects","service":"firebaseauth.googleapis.com"},"params":{},"timestamp":"2022-06-26T19:23:58.028Z","data":{"uid":"tuCsJTttxjlbGwaGlkQofoszgGR6","email":"olive.orange.321@example.com","emailVerified":true,"displayName":"Olive Orange","metadata":{"creationTime":"2022-06-26T19:23:58.010Z","lastSignInTime":"2022-06-26T19:23:58.009Z"},"customClaims":{},"providerData":[{"providerId":"google.com","rawId":"3750321883314779279776460368113387519277","federatedId":"3750321883314779279776460368113387519277","displayName":"Olive Orange","email":"olive.orange.321@example.com","screenName":"orange_olive"}]}}
+[debug] [2022-06-26T19:23:58.077Z] <<< [apiv2][status] POST http://192.168.43.238:5001/functions/projects/netninjaprojects/trigger_multicast 200
+[debug] [2022-06-26T19:23:58.077Z] <<< [apiv2][body] POST http://192.168.43.238:5001/functions/projects/netninjaprojects/trigger_multicast {"status":"multicast_acknowledged"}
