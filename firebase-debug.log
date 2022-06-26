@@ -8,3 +8,105 @@
 [debug] 
 [debug] [2022-06-26T11:13:22.479Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
 [debug] [2022-06-26T11:13:22.480Z] > authorizing via signed-in user (denniskinuthiaw@gmail.com)
+[debug] [2022-06-26T11:13:22.924Z] java version "17" 2021-09-14 LTS
+Java(TM) SE Runtime Environment (build 17+35-LTS-2724)
+
+[debug] [2022-06-26T11:13:22.926Z] Java HotSpot(TM) 64-Bit Server VM (build 17+35-LTS-2724, mixed mode, sharing)
+
+[debug] [2022-06-26T11:13:22.950Z] Parsed Java major version: 17
+[info] i  emulators: Starting emulators: auth, functions, firestore {"metadata":{"emulator":{"name":"hub"},"message":"Starting emulators: auth, functions, firestore"}}
+[debug] [2022-06-26T11:13:23.104Z] [hub] writing locator at C:\Users\denni\AppData\Local\Temp\hub-netninjaprojects.json
+[info] i  firestore: Detected non-emulator Firestore export at C:\Users\denni\Desktop\code\project-mangaer\property-save {"metadata":{"emulator":{"name":"firestore"},"message":"Detected non-emulator Firestore export at C:\\Users\\denni\\Desktop\\code\\project-mangaer\\property-save"}}
+[warn] !  functions: The following emulators are not running, calls to these services from the Functions emulator will affect production: database, hosting, pubsub, storage {"metadata":{"emulator":{"name":"functions"},"message":"The following emulators are not running, calls to these services from the Functions emulator will affect production: \u001b[1mdatabase, hosting, pubsub, storage\u001b[22m"}}
+[info] +  functions: Using node@16 from host. {"metadata":{"emulator":{"name":"functions"},"message":"Using node@16 from host."}}
+[debug] [2022-06-26T11:13:25.300Z] defaultcredentials: writing to file C:\Users\denni\AppData\Roaming\firebase\denniskinuthiaw_gmail_com_application_default_credentials.json
+[debug] [2022-06-26T11:13:25.306Z] Setting GAC to C:\Users\denni\AppData\Roaming\firebase\denniskinuthiaw_gmail_com_application_default_credentials.json {"metadata":{"emulator":{"name":"functions"},"message":"Setting GAC to C:\\Users\\denni\\AppData\\Roaming\\firebase\\denniskinuthiaw_gmail_com_application_default_credentials.json"}}
+[debug] [2022-06-26T11:13:25.309Z] > refreshing access token with scopes: []
+[debug] [2022-06-26T11:13:25.310Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2022-06-26T11:13:26.199Z] <<< HTTP RESPONSE 200 {"expires":"Mon, 01 Jan 1990 00:00:00 GMT","date":"Sun, 26 Jun 2022 11:13:24 GMT","pragma":"no-cache","cache-control":"no-cache, no-store, max-age=0, must-revalidate","content-type":"application/json; charset=utf-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","server":"scaffolding on HTTPServer2","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2022-06-26T11:13:26.255Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/netninjaprojects/adminSdkConfig [none]
+[debug] [2022-06-26T11:13:26.931Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/netninjaprojects/adminSdkConfig 200
+[debug] [2022-06-26T11:13:26.932Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/netninjaprojects/adminSdkConfig {"projectId":"netninjaprojects","databaseURL":"https://netninjaprojects-default-rtdb.firebaseio.com","storageBucket":"netninjaprojects.appspot.com","locationId":"us-central"}
+[info] i  firestore: Importing data from C:\Users\denni\Desktop\code\project-mangaer\property-save\property-save.overall_export_metadata {"metadata":{"emulator":{"name":"firestore"},"message":"Importing data from C:\\Users\\denni\\Desktop\\code\\project-mangaer\\property-save\\property-save.overall_export_metadata"}}
+[debug] [2022-06-26T11:13:29.034Z] Ignoring unsupported arg: projectId {"metadata":{"emulator":{"name":"firestore"},"message":"Ignoring unsupported arg: projectId"}}
+[debug] [2022-06-26T11:13:29.035Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"firestore"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2022-06-26T11:13:29.036Z] Starting Firestore Emulator with command {"binary":"java","args":["-Dgoogle.cloud_firestore.debug_log_level=FINE","-Duser.language=en","-jar","C:\\Users\\denni\\.cache\\firebase\\emulators\\cloud-firestore-emulator-v1.14.3.jar","--host","192.168.43.238","--port",8080,"--seed_from_export","C:\\Users\\denni\\Desktop\\code\\project-mangaer\\property-save\\property-save.overall_export_metadata","--rules","C:\\Users\\denni\\Desktop\\code\\project-mangaer\\firestore.rules","--functions_emulator","192.168.43.238:5001"],"optionalArgs":["port","webchannel_port","host","rules","functions_emulator","seed_from_export"],"joinArgs":false} {"metadata":{"emulator":{"name":"firestore"},"message":"Starting Firestore Emulator with command {\"binary\":\"java\",\"args\":[\"-Dgoogle.cloud_firestore.debug_log_level=FINE\",\"-Duser.language=en\",\"-jar\",\"C:\\\\Users\\\\denni\\\\.cache\\\\firebase\\\\emulators\\\\cloud-firestore-emulator-v1.14.3.jar\",\"--host\",\"192.168.43.238\",\"--port\",8080,\"--seed_from_export\",\"C:\\\\Users\\\\denni\\\\Desktop\\\\code\\\\project-mangaer\\\\property-save\\\\property-save.overall_export_metadata\",\"--rules\",\"C:\\\\Users\\\\denni\\\\Desktop\\\\code\\\\project-mangaer\\\\firestore.rules\",\"--functions_emulator\",\"192.168.43.238:5001\"],\"optionalArgs\":[\"port\",\"webchannel_port\",\"host\",\"rules\",\"functions_emulator\",\"seed_from_export\"],\"joinArgs\":false}"}}
+[info] i  firestore: Firestore Emulator logging to firestore-debug.log {"metadata":{"emulator":{"name":"firestore"},"message":"Firestore Emulator logging to \u001b[1mfirestore-debug.log\u001b[22m"}}
+[debug] [2022-06-26T11:13:50.298Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2022-06-26T11:13:50.299Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2022-06-26T11:13:50.299Z] Starting Emulator UI with command {"binary":"node","args":["--dns-result-order=ipv4first","C:\\Users\\denni\\.cache\\firebase\\emulators\\ui-v1.7.0\\server.bundle.js"],"optionalArgs":[],"joinArgs":false} {"metadata":{"emulator":{"name":"ui"},"message":"Starting Emulator UI with command {\"binary\":\"node\",\"args\":[\"--dns-result-order=ipv4first\",\"C:\\\\Users\\\\denni\\\\.cache\\\\firebase\\\\emulators\\\\ui-v1.7.0\\\\server.bundle.js\"],\"optionalArgs\":[],\"joinArgs\":false}"}}
+[info] i  ui: Emulator UI logging to ui-debug.log {"metadata":{"emulator":{"name":"ui"},"message":"Emulator UI logging to \u001b[1mui-debug.log\u001b[22m"}}
+[debug] [2022-06-26T11:13:50.588Z] Web / API server started at localhost:4000
+ {"metadata":{"emulator":{"name":"ui"},"message":"Web / API server started at localhost:4000\n"}}
+[info] i  functions: Watching "C:\Users\denni\Desktop\code\project-mangaer\functions" for Cloud Functions... {"metadata":{"emulator":{"name":"functions"},"message":"Watching \"C:\\Users\\denni\\Desktop\\code\\project-mangaer\\functions\" for Cloud Functions..."}}
+[debug] [2022-06-26T11:13:50.600Z] Validating nodejs source
+[debug] [2022-06-26T11:13:56.119Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "16"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^10.0.2",
+    "firebase-functions": "^3.18.0"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^0.2.0"
+  },
+  "private": true
+}
+[debug] [2022-06-26T11:13:56.120Z] Building nodejs source
+[debug] [2022-06-26T11:13:56.120Z] Analyzing nodejs backend spec
+[debug] [2022-06-26T11:13:56.125Z] Could not find functions.yaml. Must use http discovery
+[debug] [2022-06-26T11:13:56.794Z] Serving at port 9005
+
+[debug] [2022-06-26T11:13:56.981Z] Got response from /__/functions.yaml {"endpoints":{},"specVersion":"v1alpha1","requiredAPIs":[]}
+[debug] [2022-06-26T11:13:57.000Z] shutdown requested via /__/quitquitquit
+
+[info] 
+┌─────────────────────────────────────────────────────────────┐
+│ ✔  All emulators ready! It is now safe to connect your app. │
+│ i  View Emulator UI at http://localhost:4000                │
+└─────────────────────────────────────────────────────────────┘
+
+┌────────────────┬─────────────────────┬─────────────────────────────────┐
+│ Emulator       │ Host:Port           │ View in Emulator UI             │
+├────────────────┼─────────────────────┼─────────────────────────────────┤
+│ Authentication │ 192.168.43.238:9099 │ http://localhost:4000/auth      │
+├────────────────┼─────────────────────┼─────────────────────────────────┤
+│ Functions      │ 192.168.43.238:5001 │ http://localhost:4000/functions │
+├────────────────┼─────────────────────┼─────────────────────────────────┤
+│ Firestore      │ 192.168.43.238:8080 │ http://localhost:4000/firestore │
+└────────────────┴─────────────────────┴─────────────────────────────────┘
+  Emulator Hub running at localhost:4400
+  Other reserved ports: 4500
+
+Issues? Report them at https://github.com/firebase/firebase-tools/issues and attach the *-debug.log files.
+ 
+[warn] !  Error: Internal state invariant broken: no user with ID: GpWMtDTJRhtUf9dw5TixrU1JXok2
+    at AgentProjectState.getUserByLocalIdAssertingExists (C:\Users\denni\AppData\Roaming\npm\node_modules\firebase-tools\lib\emulator\auth\state.js:208:19)
+    at AgentProjectState.validateRefreshToken (C:\Users\denni\AppData\Roaming\npm\node_modules\firebase-tools\lib\emulator\auth\state.js:295:24)
+    at grantToken (C:\Users\denni\AppData\Roaming\npm\node_modules\firebase-tools\lib\emulator\auth\operations.js:1212:38)
+    at Proxy.<anonymous> (C:\Users\denni\AppData\Roaming\npm\node_modules\firebase-tools\lib\emulator\auth\server.js:375:20)
+    at C:\Users\denni\AppData\Roaming\npm\node_modules\firebase-tools\node_modules\promise-breaker\index.js:265:46
+    at processTicksAndRejections (node:internal/process/task_queues:96:5) {"metadata":{"emulator":{"name":"auth"},"message":"Error: Internal state invariant broken: no user with ID: GpWMtDTJRhtUf9dw5TixrU1JXok2\n    at AgentProjectState.getUserByLocalIdAssertingExists (C:\\Users\\denni\\AppData\\Roaming\\npm\\node_modules\\firebase-tools\\lib\\emulator\\auth\\state.js:208:19)\n    at AgentProjectState.validateRefreshToken (C:\\Users\\denni\\AppData\\Roaming\\npm\\node_modules\\firebase-tools\\lib\\emulator\\auth\\state.js:295:24)\n    at grantToken (C:\\Users\\denni\\AppData\\Roaming\\npm\\node_modules\\firebase-tools\\lib\\emulator\\auth\\operations.js:1212:38)\n    at Proxy.<anonymous> (C:\\Users\\denni\\AppData\\Roaming\\npm\\node_modules\\firebase-tools\\lib\\emulator\\auth\\server.js:375:20)\n    at C:\\Users\\denni\\AppData\\Roaming\\npm\\node_modules\\firebase-tools\\node_modules\\promise-breaker\\index.js:265:46\n    at processTicksAndRejections (node:internal/process/task_queues:96:5)"}}
+[debug] [2022-06-26T11:14:44.344Z] >>> [apiv2][query] POST http://192.168.43.238:5001/functions/projects/netninjaprojects/trigger_multicast [none]
+[debug] [2022-06-26T11:14:44.344Z] >>> [apiv2][body] POST http://192.168.43.238:5001/functions/projects/netninjaprojects/trigger_multicast {"eventId":"6f616779-2812-491c-85fe-401f1cd2321c","eventType":"providers/firebase.auth/eventTypes/user.create","resource":{"name":"projects/netninjaprojects","service":"firebaseauth.googleapis.com"},"params":{},"timestamp":"2022-06-26T11:14:44.343Z","data":{"uid":"TRILc27Fd6vid3ypjq11rkwisfhF","email":"raccoon.grass.980@example.com","emailVerified":true,"displayName":"Raccoon Grass","metadata":{"creationTime":"2022-06-26T11:14:44.340Z","lastSignInTime":"2022-06-26T11:14:44.340Z"},"customClaims":{},"providerData":[{"providerId":"google.com","rawId":"2379570591890079849944875542338503082347","federatedId":"2379570591890079849944875542338503082347","displayName":"Raccoon Grass","email":"raccoon.grass.980@example.com","screenName":"grass_raccoon"}]}}
+[debug] [2022-06-26T11:14:44.364Z] <<< [apiv2][status] POST http://192.168.43.238:5001/functions/projects/netninjaprojects/trigger_multicast 200
+[debug] [2022-06-26T11:14:44.364Z] <<< [apiv2][body] POST http://192.168.43.238:5001/functions/projects/netninjaprojects/trigger_multicast {"status":"multicast_acknowledged"}
+[warn] !  Error: Internal state invariant broken: no user with ID: NCYlPzLqTVAcPVODErmjtkvF9RUD
+    at AgentProjectState.getUserByLocalIdAssertingExists (C:\Users\denni\AppData\Roaming\npm\node_modules\firebase-tools\lib\emulator\auth\state.js:208:19)
+    at AgentProjectState.validateRefreshToken (C:\Users\denni\AppData\Roaming\npm\node_modules\firebase-tools\lib\emulator\auth\state.js:295:24)
+    at grantToken (C:\Users\denni\AppData\Roaming\npm\node_modules\firebase-tools\lib\emulator\auth\operations.js:1212:38)
+    at Proxy.<anonymous> (C:\Users\denni\AppData\Roaming\npm\node_modules\firebase-tools\lib\emulator\auth\server.js:375:20)
+    at C:\Users\denni\AppData\Roaming\npm\node_modules\firebase-tools\node_modules\promise-breaker\index.js:265:46
+    at processTicksAndRejections (node:internal/process/task_queues:96:5) {"metadata":{"emulator":{"name":"auth"},"message":"Error: Internal state invariant broken: no user with ID: NCYlPzLqTVAcPVODErmjtkvF9RUD\n    at AgentProjectState.getUserByLocalIdAssertingExists (C:\\Users\\denni\\AppData\\Roaming\\npm\\node_modules\\firebase-tools\\lib\\emulator\\auth\\state.js:208:19)\n    at AgentProjectState.validateRefreshToken (C:\\Users\\denni\\AppData\\Roaming\\npm\\node_modules\\firebase-tools\\lib\\emulator\\auth\\state.js:295:24)\n    at grantToken (C:\\Users\\denni\\AppData\\Roaming\\npm\\node_modules\\firebase-tools\\lib\\emulator\\auth\\operations.js:1212:38)\n    at Proxy.<anonymous> (C:\\Users\\denni\\AppData\\Roaming\\npm\\node_modules\\firebase-tools\\lib\\emulator\\auth\\server.js:375:20)\n    at C:\\Users\\denni\\AppData\\Roaming\\npm\\node_modules\\firebase-tools\\node_modules\\promise-breaker\\index.js:265:46\n    at processTicksAndRejections (node:internal/process/task_queues:96:5)"}}
