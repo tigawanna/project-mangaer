@@ -174,3 +174,21 @@ Change your firebase.json  to include the host variabble which is your ipv4
 }
 
 ```
+
+
+### Shop
+there's some sample data in the property-save which can be used by starting the emulator using
+```
+firebase emulators:start --import ./property-save
+```
+
+A common isuue with firebase emulator is port 8080 beig taken after emulator stops and is restarted before a system reboot
+use
+```
+npx kill-port 8080
+``` 
+ the emulator loses all data after it;s stopped but you can save it by running 
+ 
+ ```
+ firebase emulators:export ./property-save
+ ```
