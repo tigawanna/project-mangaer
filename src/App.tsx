@@ -11,8 +11,7 @@ import { Login } from "./components/auth/Login";
 import { ProtectedRoute } from "./components/auth/PrivateRoutes";
 import { Project } from './components/Projects/Project';
 import {Shops} from "./components/Shops/Shops";
-import { ShopForm } from "./components/Shops/ShopForm/ShopForm";
-
+import { Shop } from "./components/Shops/shop/Shop";
 
 function App() {
   const query = useAuthUser("user", auth);
@@ -25,7 +24,7 @@ function App() {
   return (
     <div className="h-screen w-screen overflow-x-hidden ">
       <BrowserRouter>
-        <div className="fixed top-[0px] right-1 w-full z-30">
+        <div className="fixed top-[0px] right-1 w-full z-50">
           <Toolbar user={user} />
         </div>
         <div className="w-full h-full mt-16 ">
@@ -58,14 +57,14 @@ function App() {
               }
             />
 
-          {/* <Route
-              path="/test"
+          <Route
+              path="/shop"
               element={
                 <ProtectedRoute user={user}>
-                  <ShopForm user={user} floor={"ground"}/>
+                  <Shop user={user} />
                 </ProtectedRoute>
               }
-            /> */}
+            /> 
 
             {/* @ts-ignore */}
             <Route path="/login" element={<Login user={user} />} />

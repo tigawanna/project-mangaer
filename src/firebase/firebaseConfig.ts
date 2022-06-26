@@ -3,9 +3,9 @@ import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore"
 import { getAuth} from "firebase/auth";
 
-// import { connectAuthEmulator } from "firebase/auth";
-// import {connectFirestoreEmulator} from "firebase/firestore"
-// import { connectFunctionsEmulator } from "firebase/functions";
+import { connectAuthEmulator } from "firebase/auth";
+import {connectFirestoreEmulator} from "firebase/firestore"
+import { connectFunctionsEmulator } from "firebase/functions";
 
 import { getFunctions} from "firebase/functions";
 import { getApp } from "firebase/app";
@@ -49,13 +49,13 @@ export const functions = getFunctions(getApp());
 
 
 // console.log("ipv4  ===== ",`${process.env.REACT_APP_IPV4}`)
-// const ipv4=`${process.env.REACT_APP_IPV4}` 
+
 
 // comment this out for locahost LAN use
-
-// connectFunctionsEmulator(functions, "localhost", 5001);
-// connectFirestoreEmulator(db,ipv4, 8080);
-// connectAuthEmulator(auth, `http://${ipv4}:9099`);
+const ipv4=`${process.env.REACT_APP_IPV4}` 
+connectFunctionsEmulator(functions, "localhost", 5001);
+connectFirestoreEmulator(db,ipv4, 8080);
+connectAuthEmulator(auth, `http://${ipv4}:9099`);
 
 
 //comment this out for localhost use

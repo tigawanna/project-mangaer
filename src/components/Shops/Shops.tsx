@@ -31,10 +31,9 @@ export const Shops: React.FC<ShopsProps> = ({ user }) => {
   const data = shopQuery.data as Shop[];
   if (shopQuery.error) {
     return (
-      <div className="w-full h-full flex-center">
-        ERROR LOADING SHOPS {shopQuery.error.message}
-      </div>
-    );
+      <div className="w-full h-full flex flex-wrap  text-red-900">
+      ERROR LOADING SHOPS {shopQuery.error.message}
+        </div> );
   }
 
   if (shopQuery.isLoading) {

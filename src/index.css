@@ -22,7 +22,44 @@
   background-color: #6d7e66;
 }
 
+td{
+  padding: 1px;
+  border: 0.1px solid purple;
+  text-align: center;
+  width: 10%;
+  background-color:#334155;
+}
 
+
+thead{
+  width: 100%;
+}
+tbody{
+  width: 100%;
+}
+th{
+  padding-bottom: 40px;
+  border: 0.1px solid purple;
+  text-align: center;
+  background-color: #1e293b;
+  
+}
+
+thead th:nth-child(1) {
+  width:20%;
+}
+
+thead th:nth-child(2) {
+  width:30%;
+}
+
+thead th:nth-child(3) {
+  width:20%;
+}
+
+thead th:nth-child(4) {
+  width:30%;
+}
 
 
 .flex-center{
