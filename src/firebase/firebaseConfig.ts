@@ -52,10 +52,10 @@ export const functions = getFunctions(getApp());
 
 
 // comment this out for locahost LAN use
-const ipv4=`${process.env.REACT_APP_IPV4}` 
-connectFunctionsEmulator(functions, "localhost", 5001);
-connectFirestoreEmulator(db,ipv4, 8080);
-connectAuthEmulator(auth, `http://${ipv4}:9099`);
+// const ipv4=`${process.env.REACT_APP_IPV4}` 
+// connectFunctionsEmulator(functions, "localhost", 5001);
+// connectFirestoreEmulator(db,ipv4, 8080);
+// connectAuthEmulator(auth, `http://${ipv4}:9099`);
 
 
 //comment this out for localhost use

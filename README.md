@@ -124,6 +124,9 @@ export const functions = getFunctions(getApp());
 
 ```
 
+> First time you run the app firebase will require you to create an index because the main query is accessing nested documents. wait for it to throw an error , check in the console output and click on the link in the roor message and hit build query , give it 90 seconds and refresh the app,
+ youll also need to add some data first
+
 Testing is best done locally , and firebase emulator willhelp you in that 
 [article link](https://dev.to/tigawanna/firebase-emulator-16l2)
 
@@ -176,7 +179,7 @@ Change your firebase.json  to include the host variabble which is your ipv4
 ```
 
 
-### Shop
+
 there's some sample data in the property-save which can be used by starting the emulator using
 ```
 firebase emulators:start --import ./property-save
@@ -192,5 +195,7 @@ npx kill-port 8080
  ```
  firebase emulators:export ./property-save
  ```
+
+
 
 pull requests are welcome
