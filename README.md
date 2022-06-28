@@ -31,7 +31,7 @@ const firebaseConfig = {
     };
 
 ``` 
-and add it to the .env file
+and add the values to the .env file
 
 ```
 
