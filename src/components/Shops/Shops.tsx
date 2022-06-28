@@ -41,9 +41,9 @@ export const Shops: React.FC<ShopsProps> = ({ user }) => {
   }
 
   return (
-    <div className="w-full h-full flex-col">
+    <div className="w-full h-full flex-col text-white">
       <div className="right-0 left-0 flex flex-wrap h-[10%]w-full ">
-       <div className="fixed flex h-[10%] w-full mx-1 justify-center">
+       <div className="fixed flex h-[10%] w-full mx-1 justify-center ">
           {floors.map((afloor, index) => (
             <ShopFloor
               floor={afloor}
@@ -58,7 +58,7 @@ export const Shops: React.FC<ShopsProps> = ({ user }) => {
 
    className="fixed z-40 h-full w-full bg-slate-400 bg-opacity-50 ">
     <div className="fixed z-50  ">
-    <IconContext.Provider value={{ size: "50px", }} ><FaTimes onClick={()=>setOpen(false)}/></IconContext.Provider>
+    <IconContext.Provider value={{ size: "50px", className:"text-slate-600" }} ><FaTimes onClick={()=>setOpen(false)}/></IconContext.Provider>
       </div>
     <ShopForm floor={floor} shops={data} open={open} setOpen={setOpen}/>
     </div>:null}

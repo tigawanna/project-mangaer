@@ -18,23 +18,24 @@ interface ShopDetailsProps {
 
 export const ShopDetails: React.FC<ShopDetailsProps> = ({}) => {
 return (
- <div className='w-full h-full bg-slate-400'>
- <div className='flex w-full h-full  bg-slate-500 '>
- <div className='w-full  bg-slate-500 p-5 text-3xl font-bold'>
- <div className='w-full text-3xl font-bold'>
+ <div className='w-full h-full bg-slate-400 text-white'>
+ <div className='flex flex-col sm:flex-row w-full h-full  bg-slate-500 '>
+
+ <div className='w-full  bg-slate-500 p-2 text-3xl font-bold'>
+ <div className='w-full text-base sm:text-3xl font-medium  text-center capitalize'>
  TEST SHOP
  </div>
- <div className='w-full text-8xl font-bold p-5'>
+ <div className='w-full text-6xl sm:text-8xl font-bold p-5 sm:p-5 flex-center'>
  G-67
  </div>
- </div>
+</div>
 
- <div className='w-full h-full flex-center flex-col  bg-slate-600'>
-    <div className='w-full  text-4xl font-meduium text-center '>arrears</div>
-<div className='shadow-md shadow-white rounded-lg p-10 w-[80%] flex-center mt-2'>
-<div className='w-full  text-4xl font-meduium text-center'>13,500</div>
+<div className='w-full h-full flex-center flex-col  bg-slate-600 p-5'>
+<div className='shadow-md shadow-white rounded-lg p-5 w-[80%] flex-center '>
+<div className='w-full  text-4xl font-medium text-center '>13,500</div>
  </div>
 </div>
+
  </div>
  </div>
 );
@@ -53,7 +54,7 @@ let dummyArr=[]
 
 
 return (
- <div className='w-full'>
+ <div className='w-full text-white'>
  <table className='w-full table-auto'>
 <thead>
 <tr>

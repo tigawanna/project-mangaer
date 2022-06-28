@@ -125,7 +125,8 @@ export const ShopForm: React.FC<ShopFormProps> = ({ floor,shops,open,setOpen }) 
           let num;  
           if(item.shopnumber.includes('G')){num=item.shopnumber.slice(2,4)}else{num=item.shopnumber.slice(3,5)} 
           return(
-          <div key={index} className="rounded-[50%] m-1 p-2 bg-slate-600 font-bold text-white">{num}</div>)
+          <div key={index} className="rounded-[50%] m-1 p-2 bg-slate-600 font-bold text-white">
+            {num}</div>)
           })}
           </div>
             <div className="p-2 w-[95%] flex flex-col flex-center bg-slate-600 rounded-md text-white">

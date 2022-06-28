@@ -2,7 +2,7 @@ import React from "react";
 import "./App.css";
 import { Routes, Route} from "react-router-dom";
 import { BrowserRouter} from "react-router-dom";
-import { Toolbar } from "./components/Toolbar/Toolbar";
+import { Toolbar } from "./components/Navigation/Toolbar/Toolbar";
 
 import { Home } from "./components/Home/Home";
 import { useAuthUser } from "@react-query-firebase/auth";
@@ -11,7 +11,7 @@ import { Login } from "./components/auth/Login";
 import { ProtectedRoute } from "./components/auth/PrivateRoutes";
 import { Project } from './components/Projects/Project';
 import {Shops} from "./components/Shops/Shops";
-import { Shop } from "./components/Shops/shop/Shop";
+import { Shop } from "./components/shop/Shop";
 
 function App() {
   const query = useAuthUser("user", auth);
