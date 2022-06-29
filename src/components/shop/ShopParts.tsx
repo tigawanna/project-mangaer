@@ -1,6 +1,6 @@
 import React from 'react'
 import { Shop } from '../../utils/other/types';
-import { addComma, formatTyme } from './shoputil';
+import { formatTyme } from './shoputil';
 
 interface ShopWidgetsProps {
 
@@ -19,6 +19,8 @@ shop:Shop
 }
 
 export const ShopDetails: React.FC<ShopDetailsProps> = ({shop}) => {
+
+// const total=    
 return (
  <div className='w-full h-full bg-slate-400 text-white'>
  <div className='flex flex-col sm:flex-row w-full h-full  bg-slate-500 '>

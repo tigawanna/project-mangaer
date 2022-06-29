@@ -43,10 +43,6 @@ return (
      <Link to="/shops">Shops</Link>
      </div>
 
-     <div className='m-1 w-full p-3 bg-slate-300 flex-center'>
-     <Link to="/shop">Shop</Link>
-     </div>
-
      <div 
       onClick={()=>setOpen(true)}
      className='m-1   border-slate-900 border-2 rounded-md hover:bg-slate-700 flex-center'>

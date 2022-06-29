@@ -38,8 +38,7 @@ td{
   border: 0.1px solid rgb(209, 208, 208);
   text-align: center;
   background-color:#334155;
-  width:min-content;
-  padding: 3px;
+  text-align: center;
 }
 
 
@@ -48,6 +47,7 @@ thead{
 }
 tbody{
   width: 100%;
+  height: 100%;
 }
 th{
   padding: 10px;
