@@ -12,8 +12,8 @@ export const ShopTable: React.FC<ShopTableProps> = ({payments}) => {
     
     
     return (
-     <div className='w-[95%] text-white'>
-     <table className='w-full table-auto'>
+     <div className='w-[100%] h-full text-white p-2 overflow-x-scroll'>
+     <table className='w-full '>
     <thead>
     <tr>
         <th>ID</th>
@@ -28,7 +28,8 @@ export const ShopTable: React.FC<ShopTableProps> = ({payments}) => {
      payments.map(({paymentId,date,paymentmode,payment},index)=>{
        return(
        <tr key={paymentId}>
-        <td>{index}</td>
+        <td>{paymentId}</td>
+        <td>{paymentId}</td>
         <td>{formatTyme(date)}</td>
         <td>{paymentmode}</td>
         <td>{addComma(parseInt(payment))}</td>

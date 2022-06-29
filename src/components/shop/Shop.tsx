@@ -57,7 +57,7 @@ return (
 <div className='w-full bg-slate-500'>
 <ShopDetails shop={shop}/>
 </div>
-<div className='w-full flex-center'>
+<div className='w-full h-full flex-center'>
 <ShopTable payments={payments}/>
 </div>
 
