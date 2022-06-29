@@ -7,6 +7,7 @@ import { db } from "../../../firebase/firebaseConfig";
 import { Shop, ShopFormError } from "../../../utils/other/types";
 import { useQueryClient } from "react-query";
 import { validate } from "./shopformvalidate";
+import { getNextShopNumber } from './../shoputils';
 
 
 
@@ -23,9 +24,10 @@ export const ShopForm: React.FC<ShopFormProps> = ({ floor,shops,open,setOpen }) 
     ground: "G-",
     first: "M1-",
     second: "M2-",
-    third: "M3",
+    third: "M3-",
   };
   const queryClient = useQueryClient();
+  const {existingShopNo,nextShopNo}=getNextShopNumber(shops)
 
   const [error, setError] = useState<ShopFormError>({ name: "", message: "" });
   const [input, setInput] = useState<Shop>({
@@ -35,7 +37,7 @@ export const ShopForm: React.FC<ShopFormProps> = ({ floor,shops,open,setOpen }) 
     shopfloor: floor,
     shopname: "",
     //@ts-ignore
-    shopnumber: floormap[floor],
+    shopnumber: `${floormap[floor]}${nextShopNo}`,
 
   });
 
@@ -96,12 +98,14 @@ export const ShopForm: React.FC<ShopFormProps> = ({ floor,shops,open,setOpen }) 
     e.preventDefault();
 
   const item={
-    date:input.date,
+  date:input.date,
    shopnumber:input.shopnumber.toUpperCase(),
    shopname:input.shopname.toLowerCase(),
    monthlyrent:input.monthlyrent,
    shopfloor:input.shopfloor.toLowerCase()
   }
+
+
 
     console.log('mutatin done',addMhopMutation)
 
@@ -112,6 +116,11 @@ export const ShopForm: React.FC<ShopFormProps> = ({ floor,shops,open,setOpen }) 
 
  };
 
+
+
+
+
+
   return (
     <div className="w-full h-[90%]  flex-center flex-col">
     
@@ -121,12 +130,10 @@ export const ShopForm: React.FC<ShopFormProps> = ({ floor,shops,open,setOpen }) 
  
           <div className="w-full flex-center flex flex-wrap">
           <div className="w-fit bg-slate-500 p-2 text-white">existing shop Nos:</div>
-          {shops.map((item,index)=>{
-          let num;  
-          if(item.shopnumber.includes('G')){num=item.shopnumber.slice(2,4)}else{num=item.shopnumber.slice(3,5)} 
-          return(
+          {existingShopNo.map((item,index)=>{
+           return(
           <div key={index} className="rounded-[50%] m-1 p-2 bg-slate-600 font-bold text-white">
-            {num}</div>)
+            {item}</div>)
           })}
           </div>
             <div className="p-2 w-[95%] flex flex-col flex-center bg-slate-600 rounded-md text-white">
