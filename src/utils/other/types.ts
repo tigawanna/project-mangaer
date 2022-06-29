@@ -1,5 +1,5 @@
 export interface Shop{
-date:Date    
+date:tyme | Date  
 shopname:string
 shopnumber:string
 shopfloor:string
@@ -12,7 +12,7 @@ export interface ShopFormError{
     message:string
 }
 export interface tyme{
-    nanoseconds: number,
+    nanoseconds:number,
     seconds:number
   }
 

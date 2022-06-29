@@ -22,9 +22,9 @@ function App() {
   }
 
   return (
-    <div className="h-screen w-screen overflow-x-hidden ">
+    <div className="h-screen w-screen overflow-x-hidden">
       <BrowserRouter>
-        <div className="fixed top-[0px] right-1 w-full z-50">
+        <div className="fixed top-[0px] w-full z-50">
           <Toolbar user={user} />
         </div>
         <div className="w-full h-full mt-16 ">
@@ -61,7 +61,7 @@ function App() {
               path="/shop"
               element={
                 <ProtectedRoute user={user}>
-                  <Shop user={user} />
+                  <Shop user={user} floor={'ground'} shopId={'G-01'} />
                 </ProtectedRoute>
               }
             /> 

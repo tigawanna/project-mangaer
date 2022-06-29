@@ -4,7 +4,7 @@ import { collection, query, orderBy, where } from "firebase/firestore";
 import { useFirestoreQueryData } from "@react-query-firebase/firestore";
 import { useState } from "react";
 import { Shop } from "../../utils/other/types";
-import { AddShopCard, ShopCard, ShopFloor } from "./ShopCard";
+import { AddShopCard, ShopCard, ShopFloor } from "./ShopsParts";
 import { ShopForm } from './ShopForm/ShopForm';
 import { FaTimes } from "react-icons/fa";
 import { IconContext } from 'react-icons/lib';

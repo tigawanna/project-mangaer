@@ -1,11 +1,11 @@
 import dayjs  from 'dayjs';
-import { ShopFormValidate, tyme } from './types';
+import { tyme } from './types';
 
 
 
 
 
-export const toTyme =(time?:tyme)=>{
+export const formatTyme =(time?:tyme)=>{
   if(time){
     const ty= new Date(
         //@ts-ignore

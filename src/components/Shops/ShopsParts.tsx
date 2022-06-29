@@ -2,16 +2,18 @@ import React from "react";
 import { FaPlus } from "react-icons/fa";
 import { Shop } from "../../utils/other/types";
 import { IconContext } from 'react-icons';
+import { useNavigate } from "react-router-dom";
 
 interface ShopCardProps {
   shop: Shop;
 }
 
 export const ShopCard: React.FC<ShopCardProps> = ({ shop }) => {
+  const navigate = useNavigate();
   return (
     <div
-      className=" p-4 m-1 flex-col bg-slate-500 hover:shadow-slate-600
-                           hover:shadow-lg rounded w-[90%] md:w-[30%] ">
+      onClick={()=>navigate('/shop', { state:shop })}
+      className="shop-card-container ">
       <div className="text-xl font-bold">{shop.shopnumber}</div>
       <div className="h-[80%] flex-col justify-end items-end">
         <div className="text-lg">{shop.shopfloor}</div>
@@ -36,9 +38,8 @@ export const ShopFloor: React.FC<ShopFloorProps> = ({
   setFloor,
   current,
 }) => {
-  const floorClicked = (floor: string) => {
-    setFloor(floor);
-  };
+  const floorClicked = (floor: string) => {setFloor(floor);};
+  
   const selected = current === floor ? { background: "#775569",color:"white" } : {};
   return (
     <div
