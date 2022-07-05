@@ -27,7 +27,7 @@ const image =user?.photoURL;
 
 
 return (
- <div className='w-[98%] bg-slate-500 h-16'>
+ <div className='w-[100%] bg-slate-500 h-16'>
 <IconContext.Provider value={{ size: "25px", className: "table-edit-icons" }} >
 
 {open?<Consent setOpen={setOpen} message={"Sign Out?"} action={mutation.mutate}/>:null}
@@ -39,6 +39,9 @@ return (
      {/* <div className='m-1 w-full p-3 bg-slate-600 flex-center'>
      <Link to="/project">Project</Link>
      </div> */}
+      <div className='m-1 w-full p-3 bg-slate-300 flex-center'>
+     <Link to="/payments">Payments</Link>
+     </div>
      <div className='m-1 w-full p-3 bg-slate-300 flex-center'>
      <Link to="/shops">Shops</Link>
      </div>

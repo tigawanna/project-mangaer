@@ -48,13 +48,14 @@ export const functions = getFunctions(getApp());
 //with your  ipv4 one
 
 
-console.log("ipv4  ===== ",`${process.env.REACT_APP_IPV4}`)
+// console.log("ipv4  ===== ",`${process.env.REACT_APP_IPV4}`)
 
 
 // comment this out for locahost LAN use
 
-
-const ipv4=`${process.env.REACT_APP_IPV4}` 
+const ipv4 =`192.168.43.238`
+// const ipv4=`${process.env.REACT_APP_IPV4}` 
+console.log("ipv4  in var ===== ",ipv4)
 connectFunctionsEmulator(functions, "localhost", 5001);
 connectFirestoreEmulator(db,ipv4, 8080);
 connectAuthEmulator(auth, `http://${ipv4}:9099`);

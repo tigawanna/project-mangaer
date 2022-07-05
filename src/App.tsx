@@ -12,6 +12,8 @@ import { ProtectedRoute } from "./components/auth/PrivateRoutes";
 import { Project } from './components/Projects/Project';
 import {Shops} from "./components/Shops/Shops";
 import { Shop } from "./components/shop/Shop";
+import { Payment } from "./components/Payments/Payment";
+
 
 function App() {
   const query = useAuthUser("user", auth);
@@ -24,7 +26,7 @@ function App() {
   return (
     <div className="h-screen w-screen overflow-x-hidden">
       <BrowserRouter>
-        <div className="fixed top-[0px] w-full z-50">
+        <div className="fixed top-[0px] w-[100%] z-50">
           <Toolbar user={user} />
         </div>
         <div className="w-full h-full mt-16 ">
@@ -65,7 +67,14 @@ function App() {
                 </ProtectedRoute>
               }
             /> 
-
+            <Route
+              path="/payments"
+              element={
+                <ProtectedRoute user={user}>
+                  <Payment/>
+                </ProtectedRoute>
+              }
+            />
             {/* @ts-ignore */}
             <Route path="/login" element={<Login user={user} />} />
           </Routes>

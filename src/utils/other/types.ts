@@ -22,3 +22,8 @@ export interface  ShopFormValidate{
     setError: React.Dispatch<React.SetStateAction<ShopFormError>>
     shops:Shop[]
 }  
+
+export interface ErrorState {
+    name: string;
+    error: string;
+  }
