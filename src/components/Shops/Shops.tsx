@@ -61,7 +61,7 @@ export const Shops: React.FC<ShopsProps> = ({ user }) => {
     <IconContext.Provider value={{ size: "50px", className:"text-slate-600" }} >
       <FaTimes onClick={()=>setOpen(false)}/></IconContext.Provider>
       </div>
-    <ShopForm floor={floor} shops={data} open={open} setOpen={setOpen}/>
+       <ShopForm floor={floor} shops={data} open={open} setOpen={setOpen}/>
     </div>:null}
 
       <div className="flex-center  w-full  m-2 mt-14 flex-wrap">

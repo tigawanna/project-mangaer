@@ -1,6 +1,6 @@
 import { useFirestoreDocumentMutation } from "@react-query-firebase/firestore";
 import { User } from "firebase/auth";
-import { doc,collection, addDoc, query } from "firebase/firestore";
+import { doc,collection, addDoc, query} from "firebase/firestore";
 import React from "react";
 import { useState } from "react";
 import { db } from "../../../firebase/firebaseConfig";
@@ -8,7 +8,7 @@ import { Shop, ShopFormError } from "../../../utils/other/types";
 import { useQueryClient } from "react-query";
 import { validate } from "./shopformvalidate";
 import { getNextShopNumber } from './../shoputils';
-import { tyme } from './../../../utils/other/types';
+
 
 
 
@@ -47,6 +47,7 @@ export const ShopForm: React.FC<ShopFormProps> = ({ floor,shops,open,setOpen }) 
  
 
   const shopRef = doc(db, "shops",floor,"shops",input.shopnumber);
+  
   
   
   const addMhopMutation = useFirestoreDocumentMutation(

@@ -98,14 +98,16 @@ if (paymentQuery.isLoading) {
 console.log(payments)
 return (
  <div className='h-full w-full bg-slate-600 overflow-y-hidden'>
+  
    <div className='h-fit w-full  flex-center fixed top-[70px]'>
    <div className='h-full w-fit p-2 bg-slate-600 hover:bg-slate-700 flex-center '>
   <IconContext.Provider
   value={{ size: "20px",className:"mx-[2px] text-white" }}>
-<FaRegEdit onClick={() => setUpdate(!update)} />
+   <FaRegEdit onClick={() => setUpdate(!update)} />
   </IconContext.Provider>
     </div>  
    </div>
+   
 <div className='w-full h-fit bg-slate-500 overfloe-x-hidden'>
 <ShopDetails shop={shop}/>
 </div>

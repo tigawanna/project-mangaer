@@ -5,9 +5,14 @@ import { db } from '../../firebase/firebaseConfig';
 import { TheTable } from 'table-for-react';
 import { tyme } from './../../utils/other/types';
 import { header } from './payment-vars';
+import { IconContext } from 'react-icons';
+import { FaRegEdit } from 'react-icons/fa';
+import { PaymentForm } from './PaymentForm';
+import { User } from 'firebase/auth';
+import { FaTimes } from 'react-icons/fa';
 
 interface paymentProps {
-
+user?:User|null
 }
 
 export interface PaymentType{
@@ -21,10 +26,11 @@ export interface PaymentType{
     shopno:string
     }
 
-export const Payment: React.FC<paymentProps> = ({}) => {
+export const Payment: React.FC<paymentProps> = ({user}) => {
 
-    const [update, setUpdate] = useState(true);
+    const [update, setUpdate] = useState(false);
     const [error, setError] = useState({name:"",error:""});
+    const [open, setOpen] = useState(true);
     
     
     const validate=(prev:any,current:any)=>{
@@ -67,8 +73,22 @@ if (paymentQuery.isLoading) {
 const payments=paymentQuery.data as PaymentType[]
 return (
   <div className="w-full h-full overflow-y-hidden">
-  {/* <div className="p-[10%] bg-red-400 h-[40%]">top</div> */}
+
+   <div className='h-fit w-fit  flex-center fixed top-[40px] left-[50px] z-50'>
+   <div className='h-full w-fit p-2 bg-slate-600 hover:bg-slate-700 flex-center '>
+   <IconContext.Provider
+    value={{ size: "20px",className:"mx-[2px] text-white" }}>
+   <FaRegEdit onClick={() => setUpdate(!update)} />
+   </IconContext.Provider>
+    </div>
+    </div>
+
+<div className='bg-slate-700 fixed z-50 w-full h-full'>
+<PaymentForm user={user} open={open} setOpen={setOpen}/>
+</div>
+
   <div className="absolute h-full w-full z-40 overflow-x-scroll lg:overflow-x-hidden">
+    
    <TheTable
    rows={payments}
    error={error}

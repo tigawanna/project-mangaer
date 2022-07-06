@@ -72,7 +72,7 @@ function App() {
               path="/payments"
               element={
                 <ProtectedRoute user={user}>
-                  <Payment/>
+                  <Payment user={user} />
                 </ProtectedRoute>
               }
             />
