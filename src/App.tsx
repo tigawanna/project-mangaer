@@ -3,6 +3,7 @@ import "./App.css";
 import { Routes, Route} from "react-router-dom";
 import { BrowserRouter} from "react-router-dom";
 import { Toolbar } from "./components/Navigation/Toolbar/Toolbar";
+import '../node_modules/table-for-react/dist/tailwind.css'
 
 import { Home } from "./components/Home/Home";
 import { useAuthUser } from "@react-query-firebase/auth";

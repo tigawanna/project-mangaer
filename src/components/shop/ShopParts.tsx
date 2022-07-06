@@ -43,8 +43,8 @@ return (
 
 </div>
 
-<div className='w-full h-full flex-center flex-col  bg-slate-600 p-5'>
-<div className='shadow-md shadow-white rounded-lg p-5 w-[80%] flex-center '>
+<div className='w-full h-full flex-center flex-col  bg-slate-600 p-1'>
+<div className='shadow-md shadow-white rounded-lg p-1 w-[80%] flex-center '>
 <div className='w-full  text-4xl font-medium text-center '>13,500</div>
  </div>
 </div>

@@ -10,6 +10,8 @@ import {Shop as ShopType} from '../../utils/other/types'
 import { useNavigate } from 'react-router-dom';
 import { TheTable } from 'table-for-react';
 import { header } from './shop-table-yars';
+import { IconContext } from 'react-icons';
+import { FaRegEdit } from 'react-icons/fa';
 
 
 interface ShopProps {
@@ -35,8 +37,10 @@ export const Shop: React.FC<ShopProps> = ({}) => {
 const { state } = useLocation();
 const navigate = useNavigate();
 const shop=state as ShopType
-const [update, setUpdate] = useState(true);
+const [update, setUpdate] = useState(false);
 const [error, setError] = useState({name:"",error:""});
+
+
 
 
 const validate=(prev:any,current:any)=>{
@@ -63,7 +67,9 @@ const clearError=()=>{
 setError({name:"",error:""})
 }
 
-console.log("shop ==== ",shop)
+const toggleEditMode=()=>{
+  setUpdate(!update)
+}
 
 
 const paymentRef = query(
@@ -91,11 +97,21 @@ if (paymentQuery.isLoading) {
 
 console.log(payments)
 return (
- <div className='h-full w-full bg-slate-600 flex flex-col'>
-<div className='w-full bg-slate-500'>
+ <div className='h-full w-full bg-slate-600 overflow-y-hidden'>
+   <div className='h-fit w-full  flex-center fixed top-[70px]'>
+   <div className='h-full w-fit p-2 bg-slate-600 hover:bg-slate-700 flex-center '>
+  <IconContext.Provider
+  value={{ size: "20px",className:"mx-[2px] text-white" }}>
+<FaRegEdit onClick={() => setUpdate(!update)} />
+  </IconContext.Provider>
+    </div>  
+   </div>
+<div className='w-full h-fit bg-slate-500 overfloe-x-hidden'>
 <ShopDetails shop={shop}/>
 </div>
-<div className='w-full absolute mt-[15%]'>
+<div className='w-full h-fit z-40 overflow-x-scroll lg:overflow-x-hidden 
+flex justify-center'>
+<div className='absolute w-[99%] bg-white '>
 <TheTable
      rows={payments}
      error={error}
@@ -106,6 +122,7 @@ return (
      header={header}
      clearError={clearError}
      />
+    </div>
 </div>
 
  </div>

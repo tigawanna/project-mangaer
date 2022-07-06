@@ -66,20 +66,20 @@ if (paymentQuery.isLoading) {
 
 const payments=paymentQuery.data as PaymentType[]
 return (
- <div className='w-full h-full'>
-
-   <div className='w-full overflow-x-scroll h-full absolute '>
-<TheTable
-     rows={payments}
-     error={error}
-     update={update}
-     validate={validate}
-     saveChanges={saveChanges}
-     deleteRow={deleteRow}
-     header={header}
-     clearError={clearError}
-     />
-  </div>   
- </div>
+  <div className="w-full h-full overflow-y-hidden">
+  {/* <div className="p-[10%] bg-red-400 h-[40%]">top</div> */}
+  <div className="absolute h-full w-full z-40 overflow-x-scroll lg:overflow-x-hidden">
+   <TheTable
+   rows={payments}
+   error={error}
+   update={update}
+   validate={validate}
+   saveChanges={saveChanges}
+   deleteRow={deleteRow}
+   header={header}
+   clearError={clearError}
+   />
+   </div>
+  </div>
 );
 }
