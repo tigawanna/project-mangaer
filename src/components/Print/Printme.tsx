@@ -15,11 +15,13 @@ const clearError = () => {};
 
 type MyProps = {
   // using `interface` is also ok
+title:string  
 ref: React.MutableRefObject<null>
 header:{name:string,prop:string,type:string,editable:boolean}[],
 rows:any[]
 };
 type MyState = {
+  title:string
   header:{name:string,prop:string,type:string,editable:boolean}[],
   rows:any[]
 }
@@ -29,7 +31,8 @@ export class PrintThis extends React.Component<MyProps, MyState> {
         super(props);
         this.state={
             header:this.props.header,
-            rows:this.props.rows
+            rows:this.props.rows,
+            title:this.state.title
         }
 
     }
@@ -38,6 +41,7 @@ export class PrintThis extends React.Component<MyProps, MyState> {
     console.log("class components recieving head === ",this.state)
       return (
         <div className='m-10'>
+         <div  className="capitaliza">{this.state.title}</div> 
         <TheTable
          rows={this.state.rows}
          header={this.state.header}

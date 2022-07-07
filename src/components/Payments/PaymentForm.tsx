@@ -1,6 +1,6 @@
 import { useFirestoreDocumentMutation } from "@react-query-firebase/firestore";
 import { User } from "firebase/auth";
-import { doc,collection, addDoc, query} from "firebase/firestore";
+import { doc,collection, writeBatch, query} from "firebase/firestore";
 import { orderBy, where } from "firebase/firestore";
 import { useFirestoreQueryData } from "@react-query-firebase/firestore";
 import React from "react";
@@ -69,39 +69,43 @@ setInput({...input,shopno:sop.shopnumber})
 setFormOpen(!formopen)
  }
   const paymentId=uniqid(input.shopno,floor)
+
+  const batch = writeBatch(db);
+
+  const paymentRef = doc(db, "payments",paymentId);
   const shopPaymentRef = doc(db, "shops",floor,"shops",input.shopno,"paymenthistory",paymentId);
   
-  const addMhopMutation = useFirestoreDocumentMutation(
-    shopPaymentRef,
-    { merge: true },
-    {
-      onMutate: async (newShop) => {
-        // Cancel any outgoing refetches (so they don't overwrite our optimistic update)
-        console.log(newShop)
-        await queryClient.cancelQueries(["shops",floor]);
-        // Snapshot the previous value
-        const previousShops = queryClient.getQueryData(["shops",floor]);
-        // Optimistically update to the new value
-         if(previousShops){
-          //@ts-ignore
-          queryClient.setQueryData(["shops",floor], (old) => [...old, newShop]);
+  // const addMhopMutation = useFirestoreDocumentMutation(
+  //   shopPaymentRef,
+  //   { merge: true },
+  //   {
+  //     onMutate: async (newShop) => {
+  //       // Cancel any outgoing refetches (so they don't overwrite our optimistic update)
+  //       console.log(newShop)
+  //       await queryClient.cancelQueries(["shops",floor]);
+  //       // Snapshot the previous value
+  //       const previousShops = queryClient.getQueryData(["shops",floor]);
+  //       // Optimistically update to the new value
+  //        if(previousShops){
+  //         //@ts-ignore
+  //         queryClient.setQueryData(["shops",floor], (old) => [...old, newShop]);
          
-        }
+  //       }
     
-        // Return a context object with the snapshotted value
-        return { previousShops };
-      },
-      // If the mutation fails, use the context returned from onMutate to roll back
-      onError: (err, newTodo, context) => {
-        //@ts-ignore
-        queryClient.setQueryData(["shops",floor], context.previousShops);
-      },
-      // Always refetch after error or success:
-      onSettled: () => {
-           queryClient.invalidateQueries(["shops",floor]);
-      },
-    }
-  );
+  //       // Return a context object with the snapshotted value
+  //       return { previousShops };
+  //     },
+  //     // If the mutation fails, use the context returned from onMutate to roll back
+  //     onError: (err, newTodo, context) => {
+  //       //@ts-ignore
+  //       queryClient.setQueryData(["shops",floor], context.previousShops);
+  //     },
+  //     // Always refetch after error or success:
+  //     onSettled: () => {
+  //          queryClient.invalidateQueries(["shops",floor]);
+  //     },
+  //   }
+  // );
 
 
 // console.log("input === ",input)
@@ -131,11 +135,17 @@ const handleSubmit = async(e: any) => {
 
 
 
+
 if (paymentValidation({ input, error, setError })){
-    addMhopMutation.mutate(item)
+    // addMhopMutation.mutate(item)
+    batch.set(paymentRef,item)
+    batch.set(shopPaymentRef,item)
+    batch.commit().then((stuff)=>console.log("stuff after batch write===",stuff))
+    .catch((stuff)=>console.log("error writing batch ===",stuff))
     setOpen(!open)
+
     setFormOpen(!formopen)
-    console.log('mutatin done',addMhopMutation)
+    // console.log('mutatin done',addMhopMutation)
     }
 
  };

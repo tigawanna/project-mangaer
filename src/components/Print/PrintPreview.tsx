@@ -9,6 +9,7 @@ interface PrintPreviewTypes{
 user?:User|null
 }
 interface TheTableProps {
+title:string    
 rows:any[]
 header:{name:string,prop:string,type:string,editable:boolean}[]
 }
@@ -26,7 +27,8 @@ export const PrintPreview = ({user}:PrintPreviewTypes) => {
         trigger={() => <button className='p-2 bg-slate-600 text-white fixed top-[12%] left-[50%] z-50'><FaPrint/></button>}
         content={() => componentRef.current}
       />
-      <PrintThis 
+      <PrintThis
+      title={props.title} 
       rows={props.rows}
       header={props.header}
       ref={componentRef} />
