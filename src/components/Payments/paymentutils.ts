@@ -13,7 +13,9 @@ month[9] = "October";
 month[10] = "November";
 month[11] = "December";
 export const getmonth= month[d.getMonth()];
+
 export const monthindex=d.getMonth();
+
 export const months = [
   "January",
   "February",
@@ -28,6 +30,7 @@ export const months = [
   "November",
   "December"
 ];
+
 export const minimonths = [
   "Jan",
   "Feb",
@@ -62,5 +65,10 @@ export const monthsmap = {
 export const getMonthIndex=(index:string)=>{
     //@ts-ignore
     return monthsmap[index]
+}
+
+export const getMonthName=(dt:Date)=>{
+const date = new Date(dt);  // 2009-11-10
+return date.toLocaleString('default', { month: 'long' });
 }
 

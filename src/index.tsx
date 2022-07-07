@@ -12,6 +12,8 @@ import { ReactQueryDevtools } from 'react-query/devtools'
 
 
 const queryClient = new QueryClient()
+// const previous = queryClient.getQueryData(["payments","July"]);
+// console.log("previous datda index.tsx === ",previous)
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );

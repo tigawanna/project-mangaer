@@ -31,5 +31,26 @@ export const justTym =(time:tyme|null|undefined)=>{
    
   }
 
+
+  export const findfloor=(shopnumber:string)=>{
+  const floormaps=[
+   ["G-" ,"ground"],
+   ["M1-","first"],
+   ["M2-","second"],
+   ["M3-","third"],
+   ["M4-","fourth"],
+   ["M5-","fifth"],
+  ]
+  let floor="ground"
+  for(let i=0; i<floormaps.length; i++){
+   if(shopnumber.includes(floormaps[i][0])){
+    floor = floormaps[i][1]
+    break
+   } 
+  }
+ return floor
+  }
+
   
   
+

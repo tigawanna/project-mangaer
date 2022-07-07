@@ -6,7 +6,17 @@ shopfloor:string
 monthlyrent:number
 shoparrears?:string
 }
-
+export interface Payment{
+  shopnumber:string,
+   payment:number,
+   paymentId:string,
+   madeBy?:string|null,
+   month:string,
+   date:Date,
+   paymentmode:"cheque"|"cash_deposit"|"mpesa"|"direct_transfer",
+   editedOn?:Date|null,
+   editedBy?:string|null
+}
 export interface ShopFormError{
     name:string
     message:string

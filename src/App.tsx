@@ -15,11 +15,17 @@ import {Shops} from "./components/Shops/Shops";
 import { Shop } from "./components/shop/Shop";
 import { Payment } from "./components/Payments/Payment";
 import { PrintPreview } from './components/Print/PrintPreview';
+import { QueryClient } from 'react-query';
 
 
 function App() {
   const query = useAuthUser("user", auth);
   console.log("user present query   ====  ", query.data);
+
+const queryClient = new QueryClient()
+const previous = queryClient.getQueryData(["payments","August"]);
+console.log("previous datda index.tsx === ",previous)
+
   const user = query.data;
   if (query.isFetching) {
     return <div className="w-full h-full flex-center ">Loading ....</div>;

@@ -6,11 +6,11 @@ import { useFirestoreQueryData } from "@react-query-firebase/firestore";
 import React from "react";
 import { useState } from "react";
 import { useQueryClient } from "react-query";
-import { getmonth } from "./paymentutils";
+import { getmonth,getMonthName } from "./paymentutils";
 import { db } from './../../firebase/firebaseConfig';
 import { paymentValidation } from "./payment-form-validate";
-import { Shop } from './../../utils/other/types';
-import { Payment, setPayment } from "../../utils/sharedutils";
+import { Payment, Shop } from './../../utils/other/types';
+import { setPayment } from "../../utils/sharedutils";
 
 var uniqid = require('uniqid');
 
@@ -37,7 +37,7 @@ export const PaymentForm: React.FC<PaymentFormProps> = ({ open,setOpen,user}) =>
 
   const [input, setInput] = useState<Payment>({
     date: new Date(),
-    shopno:"G-01",
+    shopnumber:"G-01",
     payment:0,
     paymentId:"",
     madeBy:"",
@@ -59,10 +59,10 @@ const updateFloor=(newfloor:string[])=>{
 }
  
 const updateShop=(sop:Shop)=>{
-setInput({...input,shopno:sop.shopnumber})
+setInput({...input,shopnumber:sop.shopnumber})
 setFormOpen(!formopen)
  }
-  const paymentId=uniqid(input.shopno,floor)
+const paymentId=uniqid(input.shopnumber,floor)
 
 
 
@@ -84,7 +84,7 @@ const handleSubmit = async(e: any) => {
 
   const item:Payment={
   date:input.date,
-  shopno:input.shopno.toUpperCase(),
+  shopnumber:input.shopnumber.toUpperCase(),
   madeBy:user?.displayName,
   month:input.month,
   payment:input.payment ,
@@ -94,7 +94,7 @@ const handleSubmit = async(e: any) => {
 }
 
 if (paymentValidation({ input, error, setError })){
-   setPayment(item,paymentId,floor,input.shopno)
+   setPayment(item,paymentId,floor,input.shopnumber,["payments",getMonthName(input.date)])
    setOpen(!open)
    setFormOpen(!formopen)
   }
@@ -137,7 +137,7 @@ if (shopQuery.error) {
                 floorshops.map((item,index)=>{
                 return(
                 <div key={index}
-                style={{backgroundColor:input.shopno===item.shopnumber?"purple":""}}
+                style={{backgroundColor:input.shopnumber===item.shopnumber?"purple":""}}
                 onClick={()=>updateShop(item)}
                 className="p-2 m-1 bg-slate-700  w-[45%] md:w-[15%]
                 cursor-pointer hover:bg-slate-800 text-white">
@@ -169,9 +169,9 @@ if (shopQuery.error) {
                 type="text"
                 placeholder="Shop number"
                 className="p-2 w-[95%]  rounded-md text-black"
-                id="shopno"
+                id="shopnumber"
                 onChange={handleChange}
-                value={input.shopno}
+                value={input.shopnumber}
                 />
                 {error && error.name === "shopno" ? (
                 <div className="shop-form-error">{error.message}</div>

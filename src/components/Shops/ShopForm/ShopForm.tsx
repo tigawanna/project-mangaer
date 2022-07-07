@@ -7,7 +7,7 @@ import { db } from "../../../firebase/firebaseConfig";
 import { Shop, ShopFormError } from "../../../utils/other/types";
 import { useQueryClient } from "react-query";
 import { validate } from "./shopformvalidate";
-import { getNextShopNumber } from './../shoputils';
+import { getNextShopNumber } from './../../../utils/sharedutils';
 
 
 
@@ -50,7 +50,7 @@ export const ShopForm: React.FC<ShopFormProps> = ({ floor,shops,open,setOpen }) 
   
   
   
-  const addMhopMutation = useFirestoreDocumentMutation(
+  const addShopMutation = useFirestoreDocumentMutation(
     
     shopRef,
     { merge: true },
@@ -109,10 +109,10 @@ export const ShopForm: React.FC<ShopFormProps> = ({ floor,shops,open,setOpen }) 
 
 
 
-    console.log('mutatin done',addMhopMutation)
+    console.log('mutatin done',addShopMutation)
 
     if (validate({ input, error, setError ,shops})) {
-          addMhopMutation.mutate(item)
+          addShopMutation.mutate(item)
        setOpen(!open)
     }
 

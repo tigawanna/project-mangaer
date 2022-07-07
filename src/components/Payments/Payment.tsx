@@ -3,29 +3,23 @@ import { collection, limit, orderBy, query,where } from "firebase/firestore";
 import { useFirestoreQueryData } from "@react-query-firebase/firestore";
 import { db } from "../../firebase/firebaseConfig";
 import { TheTable } from "table-for-react";
-import { tyme } from "./../../utils/other/types";
+import { Payment as PaymentType} from "./../../utils/other/types";
 import { header } from "./payment-vars";
 import { IconContext } from "react-icons";
 import { FaRegEdit, FaTimes, FaPlus, FaPrint } from "react-icons/fa";
 import { PaymentForm } from "./PaymentForm";
 import { User } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-import { getmonth, monthindex, months,getMonthIndex } from "./paymentutils";
+import { monthindex, months,getMonthIndex } from "./paymentutils";
+import {  setPayment } from './../../utils/sharedutils';
+import { findfloor } from './../../utils/other/util';
+
 
 interface paymentProps {
   user?: User | null;
 }
 
-export interface PaymentType {
-  date: tyme;
-  floor: string;
-  madeBy: string;
-  month: string;
-  payment: string;
-  paymentId: string;
-  paymentmode: string;
-  shopno: string;
-}
+
 
 export const Payment: React.FC<paymentProps> = ({ user }) => {
   const [update, setUpdate] = useState(false);
@@ -33,20 +27,33 @@ export const Payment: React.FC<paymentProps> = ({ user }) => {
   const [open, setOpen] = useState(false);
   const [month, setMonth] = useState<string>("August");
   const navigate = useNavigate();
-
+ 
 
   const validate = (prev: any, current: any) => {
-    if (current.name !== "john") {
-      setError({ name: "name", error: "not john" });
-      return false;
-    }
+    // if (current.name !== "john") {
+    //   setError({ name: "name", error: "not john" });
+    //   return false;
+    // }
 
     setError({ name: "", error: "" });
     return true;
   };
 
-  const saveChanges = (prev: any, current: any) => {
+  const saveChanges = (prev: PaymentType, current:PaymentType) => {
     // console.log("saving ...",current)
+    const item: PaymentType = {
+      date: current.date,
+      shopnumber: current.shopnumber.toUpperCase(),
+      madeBy: current.madeBy,
+      month: current.month,
+      payment: current.payment,
+      paymentmode: current.paymentmode,
+      paymentId: current.paymentId,
+      editedBy: user?.displayName,
+      editedOn: new Date(),
+    };
+    setPayment(item, current.paymentId,findfloor(current.shopnumber), 
+    current.shopnumber,["payments",month]);
   };
 
   const deleteRow = (current: any) => {

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Shop } from '../../utils/other/types';
-import { formatTyme } from './shoputil';
+import { formatTyme } from './../../utils/sharedutils';
 
 interface ShopWidgetsProps {
 
