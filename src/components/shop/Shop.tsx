@@ -35,8 +35,8 @@ shopno:string
 export const Shop: React.FC<ShopProps> = ({}) => {
 
 const { state } = useLocation();
-const navigate = useNavigate();
 const shop=state as ShopType
+
 const [update, setUpdate] = useState(false);
 const [error, setError] = useState({name:"",error:""});
 

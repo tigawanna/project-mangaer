@@ -14,6 +14,7 @@ import { Project } from './components/Projects/Project';
 import {Shops} from "./components/Shops/Shops";
 import { Shop } from "./components/shop/Shop";
 import { Payment } from "./components/Payments/Payment";
+import { PrintPreview } from './components/Print/PrintPreview';
 
 
 function App() {
@@ -75,6 +76,9 @@ function App() {
                   <Payment user={user} />
                 </ProtectedRoute>
               }
+            />
+            <Route
+              path="/print-preview" element={<PrintPreview user={user}/>}
             />
             {/* @ts-ignore */}
             <Route path="/login" element={<Login user={user} />} />

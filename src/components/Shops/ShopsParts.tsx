@@ -12,7 +12,7 @@ export const ShopCard: React.FC<ShopCardProps> = ({ shop }) => {
   const navigate = useNavigate();
   return (
     <div
-      onClick={()=>navigate('/shop', { state:shop })}
+      onClick={()=>navigate('/shop', { state:shop })  }
       className="shop-card-container ">
       <div className="text-xl font-bold">{shop.shopnumber}</div>
       <div className="h-[80%] flex-col justify-end items-end">

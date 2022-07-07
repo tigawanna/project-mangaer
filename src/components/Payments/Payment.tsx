@@ -6,10 +6,11 @@ import { TheTable } from 'table-for-react';
 import { tyme } from './../../utils/other/types';
 import { header } from './payment-vars';
 import { IconContext } from 'react-icons';
-import { FaRegEdit } from 'react-icons/fa';
+import { FaRegEdit, FaTimes,FaPlus, FaPrint  } from 'react-icons/fa';
 import { PaymentForm } from './PaymentForm';
 import { User } from 'firebase/auth';
-import { FaTimes } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
+
 
 interface paymentProps {
 user?:User|null
@@ -30,8 +31,8 @@ export const Payment: React.FC<paymentProps> = ({user}) => {
 
     const [update, setUpdate] = useState(false);
     const [error, setError] = useState({name:"",error:""});
-    const [open, setOpen] = useState(true);
-    
+    const [open, setOpen] = useState(false);
+    const navigate = useNavigate();
     
     const validate=(prev:any,current:any)=>{
      if(current.name!=="john"){
@@ -72,31 +73,34 @@ if (paymentQuery.isLoading) {
 
 const payments=paymentQuery.data as PaymentType[]
 return (
-  <div className="w-full h-full overflow-y-hidden">
+  <div className="w-full h-[85%] overflow-y-hidden absolute">
 
-   <div className='h-fit w-fit  flex-center fixed top-[40px] left-[50px] z-50'>
-   <div className='h-full w-fit p-2 bg-slate-600 hover:bg-slate-700 flex-center '>
+   <div className='h-fit w-full bg-slate-400  flex-center relative top-0'>
+   <div className='h-full w-fit bg-slate-600 p-2  flex-center rounded-xl'>
    <IconContext.Provider
-    value={{ size: "20px",className:"mx-[2px] text-white" }}>
+    value={{ size: "25px",className:"mx-[15px] text-white hover:text-purple-600" }}>
    <FaRegEdit onClick={() => setUpdate(!update)} />
+  {!open?<FaPlus onClick={() => setOpen(!open)} />:<FaTimes onClick={() => setOpen(!open)} />}
+   <FaPrint onClick={() => navigate('/print-preview', { state:{ rows:payments,header }
+     })} />
    </IconContext.Provider>
     </div>
     </div>
 
-<div className='bg-slate-700 fixed z-50 w-full h-full'>
+{open?<div className='bg-slate-700 fixed z-50 w-full h-full'>
 <PaymentForm user={user} open={open} setOpen={setOpen}/>
-</div>
+</div>:null}
 
   <div className="absolute h-full w-full z-40 overflow-x-scroll lg:overflow-x-hidden">
     
-   <TheTable
+  <TheTable
    rows={payments}
-   error={error}
+   header={header}
    update={update}
+   error={error}
    validate={validate}
    saveChanges={saveChanges}
    deleteRow={deleteRow}
-   header={header}
    clearError={clearError}
    />
    </div>
