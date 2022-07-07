@@ -11,7 +11,8 @@ import { useNavigate } from 'react-router-dom';
 import { TheTable } from 'table-for-react';
 import { header } from './shop-table-yars';
 import { IconContext } from 'react-icons';
-import { FaRegEdit } from 'react-icons/fa';
+import { FaRegEdit, FaPrint, FaTimes } from 'react-icons/fa';
+import { FaPlus } from 'react-icons/fa';
 
 
 interface ShopProps {
@@ -39,6 +40,9 @@ const shop=state as ShopType
 
 const [update, setUpdate] = useState(false);
 const [error, setError] = useState({name:"",error:""});
+
+const [open, setOpen] = useState(false);
+const navigate = useNavigate();
 
 
 
@@ -99,14 +103,36 @@ console.log(payments)
 return (
  <div className='h-full w-full bg-slate-600 overflow-y-hidden'>
   
-   <div className='h-fit w-full  flex-center fixed top-[70px]'>
-   <div className='h-full w-fit p-2 bg-slate-600 hover:bg-slate-700 flex-center '>
-  <IconContext.Provider
-  value={{ size: "20px",className:"mx-[2px] text-white" }}>
-   <FaRegEdit onClick={() => setUpdate(!update)} />
-  </IconContext.Provider>
-    </div>  
-   </div>
+  <div className="h-fit w-full bg-slate-400  flex-wrap flex-center relative top-0 
+      right-1 left-1 p-1">
+        <div className="h-full w-fit bg-slate-600 p-2  flex-center rounded-xl">
+          <IconContext.Provider
+            value={{
+              size: "25px",
+              className: "mx-[15px] text-white hover:text-purple-600",
+            }}
+          >
+            <FaRegEdit onClick={() => setUpdate(!update)} />
+            {!open ? (
+              <FaPlus onClick={() => setOpen(!open)} />
+            ) : (
+              <FaTimes onClick={() => setOpen(!open)} />
+            )}
+            <FaPrint
+              onClick={() =>
+                navigate("/print-preview", {
+                  state: {
+                    rows: payments,
+                    header,
+                    title: `${payments[0].month} payments for ${shop.shopname}`,
+                  },
+                })
+              }
+            />
+          </IconContext.Provider>
+        </div>
+
+      </div>
    
 <div className='w-full h-fit bg-slate-500 overfloe-x-hidden'>
 <ShopDetails shop={shop}/>

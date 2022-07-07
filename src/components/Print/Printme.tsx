@@ -32,7 +32,7 @@ export class PrintThis extends React.Component<MyProps, MyState> {
         this.state={
             header:this.props.header,
             rows:this.props.rows,
-            title:this.state.title
+            title:this.props.title
         }
 
     }
@@ -40,8 +40,8 @@ export class PrintThis extends React.Component<MyProps, MyState> {
     render() {
     console.log("class components recieving head === ",this.state)
       return (
-        <div className='m-10'>
-         <div  className="capitaliza">{this.state.title}</div> 
+        <div className='m-9'>
+         <div  className="capitaliza text-xl font-bold m-1">{this.state.title}</div> 
         <TheTable
          rows={this.state.rows}
          header={this.state.header}

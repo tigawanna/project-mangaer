@@ -82,11 +82,12 @@ export const Payment: React.FC<paymentProps> = ({ user }) => {
   const payments = paymentQuery.data as PaymentType[];
  
  
- console.log("payments  ==  ",payments)
+
 
 
   return (
     <div className="w-full h-[85%] overflow-y-hidden absolute">
+
       <div className="h-fit w-full bg-slate-400  flex-wrap flex-center relative top-0 
       right-1 left-1 p-1">
         <div className="h-full w-fit bg-slate-600 p-2  flex-center rounded-xl">
