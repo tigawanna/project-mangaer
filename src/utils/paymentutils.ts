@@ -2,6 +2,7 @@ import { Payment } from "./other/types";
 import { paymentValidation } from "./payment-form-validate";
 import { User } from 'firebase/auth';
 import { setPayment } from './sharedutils';
+import { QueryClient } from 'react-query';
 var uniqid = require('uniqid')
 
 
@@ -105,11 +106,11 @@ interface HSUBMIT{
   setOpen: React.Dispatch<React.SetStateAction<boolean>>
   formopen:boolean
   setFormOpen: React.Dispatch<React.SetStateAction<boolean>>
-
+  queryClient: QueryClient
 
 }
 
-export const handleSubmit = async({e,input,floor,user,error,setError,open,setOpen,formopen,setFormOpen}:HSUBMIT) => {
+export const handleSubmit = async({e,input,floor,user,error,setError,open,setOpen,formopen,setFormOpen,queryClient}:HSUBMIT) => {
 e.preventDefault();
 
 const paymentId=uniqid(input.shopnumber,floor)
@@ -126,7 +127,7 @@ paymentId
 }
 console.log("saving ..... ",item)
 if (paymentValidation({ input, error, setError })){
- setPayment(item,paymentId,floor,input.shopnumber,["payments",getMonthName(input.date)])
+ setPayment(item,paymentId,floor,input.shopnumber,queryClient)
  setOpen(!open)
  setFormOpen(!formopen)
 }

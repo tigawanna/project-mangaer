@@ -17,7 +17,7 @@ import { getmonth, handleChange, handleSubmit } from './../../utils/paymentutils
 import { SharedPaymentForm } from "../Shared/SharedPaymentForm";
 import { findFloor } from './../../utils/other/util';
 
-
+import { useQueryClient} from 'react-query';
 
 
 interface ShopProps {
@@ -29,7 +29,7 @@ interface ShopProps {
 export const Shop: React.FC<ShopProps> = ({ user }) => {
   const { state } = useLocation();
   const shop = state as ShopType;
-
+  const queryClient = useQueryClient() 
   const [formopen, setFormOpen] = useState(false);
   const [input, setInput] = useState<Payment>({
     date: new Date(),
@@ -81,7 +81,7 @@ export const Shop: React.FC<ShopProps> = ({ user }) => {
       editedOn: new Date(),
     };
     setPayment(item, current.paymentId, shop.shopfloor, 
-      shop.shopnumber,["payment",shop?.shopfloor, shop?.shopnumber]);
+      shop.shopnumber,queryClient);
   };
 
   const deleteRow = (current: any) => {
@@ -96,7 +96,7 @@ export const Shop: React.FC<ShopProps> = ({ user }) => {
   }
 
   const handleTheSubmit=async(e:any)=>{
-    handleSubmit({e,input,floor,user,error,setError,open,setOpen,formopen,setFormOpen})
+    handleSubmit({e,input,floor,user,error,setError,open,setOpen,formopen,setFormOpen,queryClient})
   }
 
   const clearError = () => {

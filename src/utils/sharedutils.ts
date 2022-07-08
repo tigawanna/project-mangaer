@@ -3,6 +3,7 @@ import { writeBatch,doc} from 'firebase/firestore';
 import { db } from './../firebase/firebaseConfig';
 import dayjs from 'dayjs';
 import { Payment, tyme, Shop } from './other/types';
+import { QueryClient } from 'react-query';
 
 
 export const getPaymentRef=(paymentId:string)=>{
@@ -42,34 +43,40 @@ export const getShopPaymentRef=(paymentId:string,floor:string,shopNo:string)=>{
 
 
 
-// const appendtoCache=async(index:any[],newobj:any)=>{
-//   const queryClient = new QueryClient()
-//   console.log("index for the query === ",index)
-//   await queryClient.cancelQueries(index);
-//   // Snapshot the previous value
-//   const previous = queryClient.getQueryData(index);
-//   console.log("previous data in the query cahe vs new === ",previous,newobj)
-//   // Optimistically update to the new value
-//    if(previous){
-//     console.log("previous data in the query cahe vs new === ",previous,newobj)
-//     //@ts-ignore
-//     queryClient.setQueryData(index, (oldobj) => [...oldobj, newobj]);
+const appendtoCache=async(queryClient:QueryClient,newobj:any,index:any[])=>{
+  
+  console.log("index for the query === ",index)
+  await queryClient.cancelQueries(index);
+  // Snapshot the previous value
+  const previous = queryClient.getQueryData(index);
+  console.log("previous data in the query cahe vs new === ",previous,newobj)
+  // Optimistically update to the new value
+   if(previous){
+    console.log("previous data in the query cahe vs new === ",previous,newobj)
+    //@ts-ignore
+    queryClient.setQueryData(index, (oldobj) => [...oldobj, newobj]);
    
-//   }
-// }
+  }
+}
 
 
 
-export  const setPayment=(item:Payment,paymentId:string,floor:string,shopNo:string,index:any[])=>{
+export  const setPayment=(item:Payment,paymentId:string,floor:string,shopNo:string,queryClient:QueryClient)=>{
    const paymentRef = doc(db, "payments",paymentId);
    const shopPaymentRef = doc(db, "shops",floor,"shops",shopNo,"paymenthistory",paymentId);
 
-       //add payment to the payment collection and the nesyed shop paymenyhistory collection
+   //query indexes to manually resolve cache
+   const payment_index=["payments",item.month]
+   const shoppayment_index =["payment", floor, item.shopnumber]
+    //add payment to the payment collection and the nesyed shop paymenyhistory collection
    const batch = writeBatch(db);
    batch.set(paymentRef,item)
    batch.set(shopPaymentRef,item)
    batch.commit().then((stuff)=>{
-    
+
+   appendtoCache(queryClient,item,payment_index)
+   appendtoCache(queryClient,item,shoppayment_index)
+   
     console.log("stuff after batch write===",stuff)})
    .catch((stuff)=>{console.log("error writing batch ===",stuff)})
   }

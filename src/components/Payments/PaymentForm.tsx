@@ -9,6 +9,7 @@ import { db } from './../../firebase/firebaseConfig';
 import { Payment, Shop } from './../../utils/other/types';
 import { SharedPaymentForm } from '../Shared/SharedPaymentForm';
 import { handleSubmit } from './../../utils/paymentutils';
+import { QueryClient } from 'react-query';
 
 
 ;
@@ -20,10 +21,11 @@ interface PaymentFormProps {
   user?: User|null;
   open:boolean
   setOpen: React.Dispatch<React.SetStateAction<boolean>>
+  queryClient: QueryClient
 
 }
 
-export const PaymentForm: React.FC<PaymentFormProps> = ({ open,setOpen,user}) => {
+export const PaymentForm: React.FC<PaymentFormProps> = ({ open,setOpen,user,queryClient}) => {
  
   const floors = [["ground","G-"], ["first","M1-"], ["second","M2-"], ["third","M3-"]];
  
@@ -71,12 +73,8 @@ setFormOpen(!formopen)
  }
 
  const handleTheSubmit=async(e:any)=>{
-   handleSubmit({e,input,floor,user,error,setError,open,setOpen,formopen,setFormOpen})
+   handleSubmit({e,input,floor,user,error,setError,open,setOpen,formopen,setFormOpen,queryClient})
  }
-
-
-
-  
 
 
 const shopQuery = useFirestoreQueryData(["shops", floor], shopsRef); 

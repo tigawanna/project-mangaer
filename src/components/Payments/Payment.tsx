@@ -14,7 +14,7 @@ import { monthindex, months,getMonthIndex, getmonth } from "../../utils/paymentu
 import { setPayment} from './../../utils/sharedutils';
 import { findFloor } from './../../utils/other/util';
 
-
+import { useQueryClient} from 'react-query';
 
 interface paymentProps {
   user?: User | null;
@@ -28,14 +28,9 @@ export const Payment: React.FC<paymentProps> = ({ user }) => {
   const [open, setOpen] = useState(false);
   const [month, setMonth] = useState<string>(getmonth);
   const navigate = useNavigate();
- 
+  const queryClient = useQueryClient() 
 
   const validate = (prev: any, current: any) => {
-    // if (current.name !== "john") {
-    //   setError({ name: "name", error: "not john" });
-    //   return false;
-    // }
-
     setError({ name: "", error: "" });
     return true;
   };
@@ -53,8 +48,7 @@ export const Payment: React.FC<paymentProps> = ({ user }) => {
       editedBy: user?.displayName,
       editedOn: new Date(),
     };
-    setPayment(item, current.paymentId,findFloor(current.shopnumber), 
-    current.shopnumber,["payments",month]);
+    setPayment(item, current.paymentId,findFloor(current.shopnumber),current.shopnumber,queryClient);
   };
 
   const deleteRow = (current: any) => {
@@ -94,11 +88,9 @@ export const Payment: React.FC<paymentProps> = ({ user }) => {
 
   const payments = paymentQuery.data as PaymentType[];
  
- 
+ console.log("paymets being sent to table ====== ",payments)
 
-
-
-  return (
+ return (
     <div className="w-full h-[85%] overflow-y-hidden absolute">
 
       <div className="h-fit w-full bg-slate-400  flex-wrap flex-center relative top-0 
@@ -150,7 +142,7 @@ export const Payment: React.FC<paymentProps> = ({ user }) => {
 
       {open ? (
         <div className="bg-slate-700 fixed z-50 w-full h-full">
-          <PaymentForm user={user} open={open} setOpen={setOpen} />
+          <PaymentForm user={user} open={open} setOpen={setOpen} queryClient={queryClient}/>
         </div>
       ) : null}
 
