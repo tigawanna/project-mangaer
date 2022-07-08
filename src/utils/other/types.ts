@@ -13,7 +13,7 @@ export interface Payment{
    madeBy?:string|null,
    month:string,
    date:Date,
-   paymentmode:"cheque"|"cash_deposit"|"mpesa"|"direct_transfer",
+   paymentmode:"cheque"|"cash"|"mpesa"|"transfer",
    editedOn?:Date|null,
    editedBy?:string|null
 }

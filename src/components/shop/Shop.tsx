@@ -8,12 +8,16 @@ import { useLocation } from "react-router-dom";
 import { Payment, Shop as ShopType } from "../../utils/other/types";
 import { useNavigate } from "react-router-dom";
 import { TheTable } from "table-for-react";
-import { header } from "./shop-table-yars";
+import { header } from "../../utils/shop-table-yars";
 import { IconContext } from "react-icons";
 import { FaRegEdit, FaPrint, FaTimes } from "react-icons/fa";
 import { FaPlus } from "react-icons/fa";
 import { setPayment,deletePayment } from "../../utils/sharedutils";
-import { QueryClient } from "react-query";
+import { getmonth, handleChange, handleSubmit } from './../../utils/paymentutils';
+import { SharedPaymentForm } from "../Shared/SharedPaymentForm";
+import { findFloor } from './../../utils/other/util';
+
+
 
 
 interface ShopProps {
@@ -25,7 +29,19 @@ interface ShopProps {
 export const Shop: React.FC<ShopProps> = ({ user }) => {
   const { state } = useLocation();
   const shop = state as ShopType;
-  const queryClient = new QueryClient()
+
+  const [formopen, setFormOpen] = useState(false);
+  const [input, setInput] = useState<Payment>({
+    date: new Date(),
+    shopnumber:shop.shopnumber,
+    payment:0,
+    paymentId:"",
+    madeBy:"",
+    month:getmonth,
+    paymentmode:"cash"
+
+  });
+
   const [update, setUpdate] = useState(false);
   const [error, setError] = useState({ name: "", error: "" });
 
@@ -73,6 +89,16 @@ export const Shop: React.FC<ShopProps> = ({ user }) => {
     deletePayment(current.paymentId, shop.shopfloor, shop.shopnumber);
   };
 
+  const floor = findFloor(shop.shopnumber)
+
+  const handleTheChange=(e:any)=>{
+    handleChange({e,input,setInput})
+  }
+
+  const handleTheSubmit=async(e:any)=>{
+    handleSubmit({e,input,floor,user,error,setError,open,setOpen,formopen,setFormOpen})
+  }
+
   const clearError = () => {
     setError({ name: "", error: "" });
   };
@@ -90,6 +116,8 @@ export const Shop: React.FC<ShopProps> = ({ user }) => {
     ),
     orderBy("date", "desc")
   );
+ 
+  console.log("shop payment dapenadncies ===== ",shop)
 
   const paymentQuery = useFirestoreQueryData(
     ["payment", shop?.shopfloor, shop?.shopnumber],
@@ -108,11 +136,12 @@ export const Shop: React.FC<ShopProps> = ({ user }) => {
     );
   }
 
-  if (paymentQuery.isLoading) {
+  if (paymentQuery.isLoading || payments?.length===0) {
     return <div className="w-full h-full flex-center"> loading ..... </div>;
   }
 
-  console.log(payments);
+  console.log("shop payments === ",payments);
+
   return (
     <div className="h-full w-full bg-slate-600 overflow-y-hidden">
       <div
@@ -128,9 +157,9 @@ export const Shop: React.FC<ShopProps> = ({ user }) => {
           >
             <FaRegEdit onClick={() => setUpdate(!update)} />
             {!open ? (
-              <FaPlus onClick={() => setOpen(!open)} />
+              <FaPlus onClick={() => setFormOpen(!formopen)} />
             ) : (
-              <FaTimes onClick={() => setOpen(!open)} />
+              <FaTimes onClick={() => setFormOpen(!formopen)} />
             )}
             <FaPrint
               onClick={() =>
@@ -148,22 +177,27 @@ export const Shop: React.FC<ShopProps> = ({ user }) => {
       </div>
 
       <div className="w-full h-fit bg-slate-500 overfloe-x-hidden">
-        <ShopDetails shop={shop} />
+      <ShopDetails shop={shop} />
       </div>
-      <div
-        className="w-full h-fit z-40 overflow-x-scroll lg:overflow-x-hidden 
-flex justify-center"
-      >
+      {formopen?<SharedPaymentForm
+       formopen={formopen}
+       input={input}
+       setFormOpen={setFormOpen}
+       handleChange={handleTheChange}
+       handleSubmit={handleTheSubmit}
+       error={error}
+       />:null}
+      <div className="w-full h-fit z-40 overflow-x-scroll lg:overflow-x-hidden flex justify-center">
         <div className="absolute w-[99%] bg-white ">
           <TheTable
             rows={payments}
+            header={header}
             error={error}
             update={update}
             validate={validate}
             saveChanges={saveChanges}
             deleteRow={deleteRow}
-            header={header}
-            clearError={clearError}
+           clearError={clearError}
           />
         </div>
       </div>

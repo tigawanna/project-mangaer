@@ -32,7 +32,7 @@ export const justTym =(time:tyme|null|undefined)=>{
   }
 
 
-  export const findfloor=(shopnumber:string)=>{
+  export const findFloor=(shopnumber:string)=>{
   const floormaps=[
    ["G-" ,"ground"],
    ["M1-","first"],

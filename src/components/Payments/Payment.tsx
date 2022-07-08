@@ -4,15 +4,16 @@ import { useFirestoreQueryData } from "@react-query-firebase/firestore";
 import { db } from "../../firebase/firebaseConfig";
 import { TheTable } from "table-for-react";
 import { Payment as PaymentType} from "./../../utils/other/types";
-import { header } from "./payment-vars";
+import { header } from "../../utils/payment-vars";
 import { IconContext } from "react-icons";
 import { FaRegEdit, FaTimes, FaPlus, FaPrint } from "react-icons/fa";
 import { PaymentForm } from "./PaymentForm";
 import { User } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-import { monthindex, months,getMonthIndex } from "./paymentutils";
-import {  setPayment } from './../../utils/sharedutils';
-import { findfloor } from './../../utils/other/util';
+import { monthindex, months,getMonthIndex, getmonth } from "../../utils/paymentutils";
+import { setPayment} from './../../utils/sharedutils';
+import { findFloor } from './../../utils/other/util';
+
 
 
 interface paymentProps {
@@ -25,7 +26,7 @@ export const Payment: React.FC<paymentProps> = ({ user }) => {
   const [update, setUpdate] = useState(false);
   const [error, setError] = useState({ name: "", error: "" });
   const [open, setOpen] = useState(false);
-  const [month, setMonth] = useState<string>("August");
+  const [month, setMonth] = useState<string>(getmonth);
   const navigate = useNavigate();
  
 
@@ -52,7 +53,7 @@ export const Payment: React.FC<paymentProps> = ({ user }) => {
       editedBy: user?.displayName,
       editedOn: new Date(),
     };
-    setPayment(item, current.paymentId,findfloor(current.shopnumber), 
+    setPayment(item, current.paymentId,findFloor(current.shopnumber), 
     current.shopnumber,["payments",month]);
   };
 
@@ -71,8 +72,13 @@ export const Payment: React.FC<paymentProps> = ({ user }) => {
 
 
   const paymentRef = query(collection(db, "payments"), orderBy("date", "desc")
-  ,where('month', "==" , month));
-  const paymentQuery = useFirestoreQueryData(["payments",month], paymentRef);
+  // ,where('month', "==" , month)
+  );
+  const paymentQuery = useFirestoreQueryData(["payments",month], paymentRef,{
+  
+  });
+
+
 
   if (paymentQuery.error) {
     return (

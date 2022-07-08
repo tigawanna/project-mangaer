@@ -1,31 +1,66 @@
 
-import { writeBatch,doc } from 'firebase/firestore';
+import { writeBatch,doc} from 'firebase/firestore';
 import { db } from './../firebase/firebaseConfig';
 import dayjs from 'dayjs';
 import { Payment, tyme, Shop } from './other/types';
-import { QueryClient } from 'react-query';
 
 
-
-
-const appendtoCache=async(index:any[],newobj:any)=>{
-  const queryClient = new QueryClient()
-  console.log("index for the query === ",index)
-  await queryClient.cancelQueries(index);
-  // Snapshot the previous value
-  const previous = queryClient.getQueryData(index);
-  console.log("previous data in the query cahe vs new === ",previous,newobj)
-  // Optimistically update to the new value
-   if(previous){
-    console.log("previous data in the query cahe vs new === ",previous,newobj)
-    //@ts-ignore
-    queryClient.setQueryData(index, (oldobj) => [...oldobj, newobj]);
-   
-  }
+export const getPaymentRef=(paymentId:string)=>{
+  return doc(db, "payments",paymentId);
 }
 
-export  const setPayment=(item:Payment,paymentId:string,floor:string,
-  shopNo:string,index:any[])=>{
+export const getShopPaymentRef=(paymentId:string,floor:string,shopNo:string)=>{
+  return doc(db, "shops",floor,"shops",shopNo,"paymenthistory",paymentId);  
+}
+
+// export const getPaymentBacthInstance=(item:Payment,paymentId:string,floor:string,shopNo:string)=>{
+//   const paymentRef = doc(db, "payments",paymentId);
+//   const shopPaymentRef = doc(db, "shops",floor,"shops",shopNo,"paymenthistory",paymentId);
+//   const batch = writeBatch(db);
+//   batch.set(paymentRef,item)
+//   batch.set(shopPaymentRef,item)
+ 
+//   return batch
+// }
+
+// export const useBatchPayment=(item:Payment,paymentId:string,floor:string,shopNo:string,index:any[])=>{
+// const batch = writeBatch(db);
+
+// const paymentRef = doc(db, "payments",paymentId);
+// const shopPaymentRef = doc(db, "shops",floor,"shops",shopNo,"paymenthistory",paymentId);  
+// const mutation = useFirestoreWriteBatch(batch,{
+// onSuccess: async(data,variables)=>{
+//   console.log("batch hook success === ",data)
+// }
+// });
+// batch.set(paymentRef,item)
+// batch.set(shopPaymentRef,item)
+
+
+// mutation.mutate()
+// }
+
+
+
+// const appendtoCache=async(index:any[],newobj:any)=>{
+//   const queryClient = new QueryClient()
+//   console.log("index for the query === ",index)
+//   await queryClient.cancelQueries(index);
+//   // Snapshot the previous value
+//   const previous = queryClient.getQueryData(index);
+//   console.log("previous data in the query cahe vs new === ",previous,newobj)
+//   // Optimistically update to the new value
+//    if(previous){
+//     console.log("previous data in the query cahe vs new === ",previous,newobj)
+//     //@ts-ignore
+//     queryClient.setQueryData(index, (oldobj) => [...oldobj, newobj]);
+   
+//   }
+// }
+
+
+
+export  const setPayment=(item:Payment,paymentId:string,floor:string,shopNo:string,index:any[])=>{
    const paymentRef = doc(db, "payments",paymentId);
    const shopPaymentRef = doc(db, "shops",floor,"shops",shopNo,"paymenthistory",paymentId);
 
@@ -34,7 +69,7 @@ export  const setPayment=(item:Payment,paymentId:string,floor:string,
    batch.set(paymentRef,item)
    batch.set(shopPaymentRef,item)
    batch.commit().then((stuff)=>{
-    appendtoCache(index,item)
+    
     console.log("stuff after batch write===",stuff)})
    .catch((stuff)=>{console.log("error writing batch ===",stuff)})
   }

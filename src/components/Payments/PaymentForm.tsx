@@ -1,18 +1,17 @@
 
 import { User } from "firebase/auth";
-import { collection,query} from "firebase/firestore";
-import { orderBy, where } from "firebase/firestore";
-import { useFirestoreQueryData } from "@react-query-firebase/firestore";
+import { collection,query,orderBy, where } from "firebase/firestore";
+import { useFirestoreQueryData} from "@react-query-firebase/firestore";
 import React from "react";
 import { useState } from "react";
-import { useQueryClient } from "react-query";
-import { getmonth,getMonthName } from "./paymentutils";
+import { getmonth,handleChange } from "../../utils/paymentutils";
 import { db } from './../../firebase/firebaseConfig';
-import { paymentValidation } from "./payment-form-validate";
 import { Payment, Shop } from './../../utils/other/types';
-import { setPayment } from "../../utils/sharedutils";
+import { SharedPaymentForm } from '../Shared/SharedPaymentForm';
+import { handleSubmit } from './../../utils/paymentutils';
 
-var uniqid = require('uniqid');
+
+;
 
 
 
@@ -25,13 +24,15 @@ interface PaymentFormProps {
 }
 
 export const PaymentForm: React.FC<PaymentFormProps> = ({ open,setOpen,user}) => {
-  const floormap = { ground: "G-", first: "M1-",second: "M2-",third: "M3-" };
+ 
   const floors = [["ground","G-"], ["first","M1-"], ["second","M2-"], ["third","M3-"]];
-  const queryClient = useQueryClient();
+ 
 
   const [floor, setFloor] = useState("ground");
   const [formopen, setFormOpen] = useState(false);
-  const [error, setError] = useState({ name: "", message: "" });
+  
+ 
+  const [error, setError] = useState({ name: "", error: "" });
   
   console.log("error ==== ",error)
 
@@ -42,7 +43,7 @@ export const PaymentForm: React.FC<PaymentFormProps> = ({ open,setOpen,user}) =>
     paymentId:"",
     madeBy:"",
     month:getmonth,
-    paymentmode:"cash_deposit"
+    paymentmode:"cash"
 
   });
 
@@ -62,44 +63,21 @@ const updateShop=(sop:Shop)=>{
 setInput({...input,shopnumber:sop.shopnumber})
 setFormOpen(!formopen)
  }
-const paymentId=uniqid(input.shopnumber,floor)
 
+
+
+ const handleTheChange=(e:any)=>{
+   handleChange({e,input,setInput})
+ }
+
+ const handleTheSubmit=async(e:any)=>{
+   handleSubmit({e,input,floor,user,error,setError,open,setOpen,formopen,setFormOpen})
+ }
 
 
 
   
 
-const handleChange = (e: any) => {
-    const { value } = e.target;
-    setInput({
-      ...input,
-      [e.target.id]: value,
-    });
-  };
-
-
-
-const handleSubmit = async(e: any) => {
-  e.preventDefault();
-
-  const item:Payment={
-  date:input.date,
-  shopnumber:input.shopnumber.toUpperCase(),
-  madeBy:user?.displayName,
-  month:input.month,
-  payment:input.payment ,
-  paymentmode:input.paymentmode,
-  paymentId
-
-}
-
-if (paymentValidation({ input, error, setError })){
-   setPayment(item,paymentId,floor,input.shopnumber,["payments",getMonthName(input.date)])
-   setOpen(!open)
-   setFormOpen(!formopen)
-  }
-
- };
 
 const shopQuery = useFirestoreQueryData(["shops", floor], shopsRef); 
 
@@ -149,83 +127,14 @@ if (shopQuery.error) {
                 }
           </div>
       </div>
-
-
-
-
-
-    {formopen?
-    <div className="w-[90%] md:w-[40%] h-[60%] flex-center fixed left-[5%] md:left-[30%] top-[20%] z-20">
-        
-        <form className="w-full h-full flex-center ">
-         <div className="p-2 w-[90%] flex flex-col items-center justify-center 
-             rounded-md text-white bg-slate-500">
-
-            <div className="w-full h-full flex sm:flex-row flex-col ">
-            {/* shop number */}
-            <div className="w-full flex flex-col m-1">
-                <label className="text-sm">Shop Number</label>
-                <input
-                type="text"
-                placeholder="Shop number"
-                className="p-2 w-[95%]  rounded-md text-black"
-                id="shopnumber"
-                onChange={handleChange}
-                value={input.shopnumber}
-                />
-                {error && error.name === "shopno" ? (
-                <div className="shop-form-error">{error.message}</div>
-                ) : null}
-            </div>
-
-            {/* shop name */}
-            <div className="w-full flex flex-col m-1">
-                <label className="text-sm">payment</label>
-                <input
-                type="text"
-                placeholder="Payment"
-                className="p-2 w-[95%]  rounded-md text-black"
-                id="payment"
-                onChange={handleChange}
-                value={input.payment}
-                />
-                {error && error.name === "payment" ? (
-                <div className="shop-form-error">{error.message}</div>
-                ) : null}
-            </div>
-            </div>
-
-            <div className="w-full h-full flex sm:flex-row flex-col ">
-            {/* monthly rent */}
-            <div className="w-[95%] flex flex-col m-1 ">
-            <label className="text-sm">Mode</label>
-                    <select id="paymentmode" onChange={handleChange} className="p-2 border-0 text-black">
-                    <option value="cash_deposit">select the payment mode</option>
-                    <option value="cash_deposti">cash deposit</option>
-                    <option value="cheque">Cheque</option>
-                    <option value="mpesa">Mpesa</option>
-                    <option value="direct_deposit">Direct Deposit</option>
-                    </select>
-                
-                {error && error.name === "paymentmode" ? (
-                <div className="shop-form-error">{error.message}</div>
-                ) : null}
-            </div>
-            </div>
-            <button
-            onClick={(e)=>handleSubmit(e)}
-            className="py-2 px-5 m-2 bg-slate-700 rounded 
-            hover:bg-slate-800 capitalize font-medium text-white"
-            >add</button>
-            </div>
-        </form>
-        </div>:null}
-         {formopen?<div 
-         onClick={()=>setFormOpen(!formopen)}
-         className="bg-slate-700 opacity-70 fixed top-0 w-full h-full z-10"></div>:null}
-
-
-   
+       {formopen?<SharedPaymentForm
+       formopen={formopen}
+       input={input}
+       setFormOpen={setFormOpen}
+       handleChange={handleTheChange}
+       handleSubmit={handleTheSubmit}
+       error={error}
+       />:null}
       </div>
  
   );
