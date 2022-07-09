@@ -77,7 +77,7 @@ export const Shop: React.FC<ShopProps> = ({ user }) => {
 
   const deleteRow = (current: any) => {
     console.log("delteing current ,",current)
-    deletePayment(current.paymentId, shop.shopfloor, shop.shopnumber);
+    deletePayment(current, shop.shopfloor, shop.shopnumber,queryClient);
   };
 
   const floor = shop.shopfloor
@@ -131,7 +131,7 @@ export const Shop: React.FC<ShopProps> = ({ user }) => {
     return <div className="w-full h-full flex-center"> loading ..... </div>;
   }
 
-  // console.log("shop payments === ",payments);
+  console.log("shop payments === ",payments);
 
   return (
     <div className="h-full w-full bg-slate-600 overflow-y-hidden">

@@ -54,7 +54,7 @@ export const Payment: React.FC<paymentProps> = ({ user }) => {
   const deleteRow = (current:PaymentType) => {
     // console.log("delteing current ,",current)
     setError({name:"name",error:"not john"})
-    deletePayment(current.paymentId,findFloor(current.shopnumber),current.shopnumber)
+    deletePayment(current,findFloor(current.shopnumber),current.shopnumber,queryClient)
   };
 
   const clearError = () => {

@@ -56,21 +56,57 @@ const appendtoCache=async(queryClient:QueryClient,newobj:any,index:any[])=>{
    if(previous){
     console.log("previous data exists === ",previous)
 
+  //since this is being called on create and update , if the dpaymentId
+  //exists it's spliced out to avoid duplication in cache
 
-    //@ts-ignore
     queryClient.setQueryData(index, (oldobj:any) => {
-      console.log("oldobj === ",oldobj)
+      // console.log("oldobj === ",oldobj)
       let final =  [...oldobj, newobj]
       for(let i = 0; i<oldobj.length; i++){
         if(oldobj[i].paymentId === newobj.paymentId){
          console.log("exists") 
          oldobj.splice(i,1,newobj)
          final = oldobj
-         console.log("oldobj after splice=== ",oldobj)  
+        //  console.log("oldobj after splice=== ",oldobj)  
          break
         }
       }
       
+      return(final)
+    });
+   
+  }
+}
+
+const removeFromCache=async(queryClient:QueryClient,newobj:any,index:any[])=>{
+  
+  // console.log("index for the query === ",index)
+  // console.log("new data to append=== ",newobj)
+
+  await queryClient.cancelQueries(index);
+  // Snapshot the previous value
+  const previous = queryClient.getQueryData(index) as any[]
+
+  // Optimistically update to the new value
+   if(previous){
+    // console.log("previous data exists === ",previous)
+
+  //splice out any item in cache with the give payment id on that index 
+  //and return the remaining elements
+
+    queryClient.setQueryData(index, (oldobj:any) => {
+      // console.log("oldobj === ",oldobj)
+      let final =  [oldobj]
+      for(let i = 0; i<oldobj.length; i++){
+        if(oldobj[i].paymentId === newobj.paymentId){
+         console.log("exists") 
+         oldobj.splice(i,1)
+         final = oldobj
+
+         break
+        }
+      }
+
       return(final)
     });
    
@@ -97,21 +133,27 @@ const appendtoCache=async(queryClient:QueryClient,newobj:any,index:any[])=>{
    appendtoCache(queryClient,item,payment_index)
    appendtoCache(queryClient,item,shoppayment_index)
    
-    console.log("stuff after batch write===",stuff)})
+
+  })
    .catch((stuff)=>{console.log("error writing batch ===",stuff)})
   }
 
 
 
-  export  const deletePayment=(paymentId:string,floor:string,shopNo:string)=>{
-    const paymentRef = doc(db, "payments",paymentId);
-    const shopPaymentRef = doc(db, "shops",floor,"shops",shopNo,"paymenthistory",paymentId);
- 
+  export  const deletePayment=(item:Payment,floor:string,shopNo:string,queryClient:QueryClient)=>{
+    const paymentRef = doc(db, "payments",item.paymentId);
+    const shopPaymentRef = doc(db, "shops",floor,"shops",shopNo,"paymenthistory",item.paymentId);
+  //   const payment_index=["payments",item.month]
+  //  const shoppayment_index =["payment", floor,item.shopnumber]
     //add payment to the payment collection and the nesyed shop paymenyhistory collection
     const batch = writeBatch(db);
     batch.delete(paymentRef)
     batch.delete(shopPaymentRef)
     batch.commit().catch((stuff)=>{console.log("error deleting batch ===",stuff)})
+
+    // removeFromCache(queryClient,item,payment_index)
+    // removeFromCache(queryClient,item,shoppayment_index)
+
    } 
 
 
