@@ -10,7 +10,7 @@ made with
 
 - ### react-query for state management and api calls
 - ### Firebase for tha backend 
-
+ [Live demo](https://tigawanna.github.io/project-mangaer/)
 
 `Getting started`
 
