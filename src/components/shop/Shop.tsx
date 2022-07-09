@@ -58,7 +58,7 @@ export const Shop: React.FC<ShopProps> = ({ user }) => {
   };
 
   const saveChanges = (prev:Payment, current: Payment) => {
-    console.log("saving ...", current);
+    // console.log("saving ...", current);
 
     const item: Payment = {
       date: current.date,
@@ -76,7 +76,7 @@ export const Shop: React.FC<ShopProps> = ({ user }) => {
   };
 
   const deleteRow = (current: any) => {
-    console.log("delteing current ,",current)
+    // console.log("delteing current ,",current)
     deletePayment(current, shop.shopfloor, shop.shopnumber,queryClient);
   };
 
@@ -127,7 +127,7 @@ export const Shop: React.FC<ShopProps> = ({ user }) => {
     );
   }
 
-  if (paymentQuery.isLoading || payments?.length===0) {
+  if (paymentQuery.isLoading) {
     return <div className="w-full h-full flex-center"> loading ..... </div>;
   }
 

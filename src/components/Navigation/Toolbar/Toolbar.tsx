@@ -27,7 +27,7 @@ const image =user?.photoURL;
 
 
 return (
- <div className='w-[100%] bg-slate-500 h-16'>
+ <div className='w-[100%] bg-slate-500 h-16 max-h-16'>
 <IconContext.Provider value={{ size: "25px", className: "table-edit-icons" }} >
 
 {open?<Consent setOpen={setOpen} message={"Sign Out?"} action={mutation.mutate}/>:null}
@@ -54,7 +54,7 @@ return (
     //   @ts-ignore 
        src={image} 
        alt={''}
-       className="rounded-md h-full  w-full"
+       className="rounded-md h-full max-h-[50px] min-w-[40px] w-full"
        />}
      </div>
 

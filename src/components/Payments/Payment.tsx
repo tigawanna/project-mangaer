@@ -11,7 +11,7 @@ import { PaymentForm } from "./PaymentForm";
 import { User } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { monthindex, months,getMonthIndex, getmonth } from "../../utils/paymentutils";
-import { deletePayment, setPayment} from './../../utils/sharedutils';
+import { deletePayment, setPayment, dummy_payment, insert_dummy_to_cache } from './../../utils/sharedutils';
 import { findFloor } from './../../utils/other/util';
 
 import { useQueryClient} from 'react-query';
@@ -73,7 +73,9 @@ export const Payment: React.FC<paymentProps> = ({ user }) => {
   
   });
 
-
+  if (paymentQuery.error && month === getmonth) {
+    insert_dummy_to_cache(dummy_payment,["payments",getmonth],queryClient)
+   }
 
   if (paymentQuery.error) {
     return (
@@ -123,6 +125,7 @@ export const Payment: React.FC<paymentProps> = ({ user }) => {
           </IconContext.Provider>
         </div>
         <div className="  ml-3 flex-center flex-wrap">
+          {/* eslint-disable-next-line array-callback-return */}
           {months.map((item, index) => {
             if (index <= monthindex) {
               return (
@@ -131,7 +134,8 @@ export const Payment: React.FC<paymentProps> = ({ user }) => {
                   }}
                   key={index}
                   onClick={() => selectMonth(index)}
-                  className="w-fit m-1 bg-slate-600 hover:bg-purple-600 p-1 text-white  rounded-lg"
+                  className="w-fit m-1 bg-slate-600 hover:bg-purple-700 p-2 text-white 
+                  cursor-pointer rounded-lg"
                 >
                   {item}
                 </div>

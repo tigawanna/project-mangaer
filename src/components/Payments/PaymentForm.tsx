@@ -100,8 +100,8 @@ if (shopQuery.error) {
           <div key={index}
           style={{backgroundColor:floor===item[0]?"purple":""}}
           onClick={()=>updateFloor(item)}
-          className="rounded-sm m-1 p-2 bg-slate-600 hover:bg-purple-600 
-          font-bold text-white cursor-pointer">
+          className="rounded-lg m-1 p-2 bg-slate-600 hover:bg-purple-600 
+          font-bold text-white text-lg cursor-pointer capitalize">
             {item[0]}</div>)
           })}
           </div>  
@@ -116,7 +116,7 @@ if (shopQuery.error) {
                 style={{backgroundColor:input.shopnumber===item.shopnumber?"purple":""}}
                 onClick={()=>updateShop(item)}
                 className="p-2 m-1 bg-slate-700  w-[45%] md:w-[15%]
-                cursor-pointer hover:bg-slate-800 text-white">
+                cursor-pointer hover:bg-slate-800 text-white rounded-lg ">
                 <div className="text-lg font-bold ">{item.shopnumber}</div>
                 <div className="flex-center p-1 m-1 bg-slate-500">{item.shopname}</div>
                </div>

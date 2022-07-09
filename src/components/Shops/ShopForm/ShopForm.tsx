@@ -1,6 +1,6 @@
 import { useFirestoreDocumentMutation } from "@react-query-firebase/firestore";
 import { User } from "firebase/auth";
-import { doc,collection, addDoc, query} from "firebase/firestore";
+import { doc} from "firebase/firestore";
 import React from "react";
 import { useState } from "react";
 import { db } from "../../../firebase/firebaseConfig";
@@ -48,8 +48,6 @@ export const ShopForm: React.FC<ShopFormProps> = ({ floor,shops,open,setOpen }) 
 
   const shopRef = doc(db, "shops",floor,"shops",input.shopnumber);
   
-  
-  
   const addShopMutation = useFirestoreDocumentMutation(
     
     shopRef,
@@ -71,15 +69,15 @@ export const ShopForm: React.FC<ShopFormProps> = ({ floor,shops,open,setOpen }) 
         // Return a context object with the snapshotted value
         return { previousShops };
       },
-      // If the mutation fails, use the context returned from onMutate to roll back
-      onError: (err, newTodo, context) => {
-        //@ts-ignore
-        queryClient.setQueryData(["shops",floor], context.previousShops);
-      },
-      // Always refetch after error or success:
-      onSettled: () => {
-           queryClient.invalidateQueries(["shops",floor]);
-      },
+      // // If the mutation fails, use the context returned from onMutate to roll back
+      // onError: (err, newTodo, context) => {
+      //   //@ts-ignore
+      //   queryClient.setQueryData(["shops",floor], context.previousShops);
+      // },
+      // // Always refetch after error or success:
+      // onSettled: () => {
+      //      queryClient.invalidateQueries(["shops",floor]);
+      // },
     }
   );
 
@@ -109,7 +107,7 @@ export const ShopForm: React.FC<ShopFormProps> = ({ floor,shops,open,setOpen }) 
 
 
 
-    console.log('mutatin done',addShopMutation)
+    // console.log('mutatin done',addShopMutation)
 
     if (validate({ input, error, setError ,shops})) {
           addShopMutation.mutate(item)

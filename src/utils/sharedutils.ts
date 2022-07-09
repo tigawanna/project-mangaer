@@ -14,34 +14,10 @@ export const getShopPaymentRef=(paymentId:string,floor:string,shopNo:string)=>{
   return doc(db, "shops",floor,"shops",shopNo,"paymenthistory",paymentId);  
 }
 
-// export const getPaymentBacthInstance=(item:Payment,paymentId:string,floor:string,shopNo:string)=>{
-//   const paymentRef = doc(db, "payments",paymentId);
-//   const shopPaymentRef = doc(db, "shops",floor,"shops",shopNo,"paymenthistory",paymentId);
-//   const batch = writeBatch(db);
-//   batch.set(paymentRef,item)
-//   batch.set(shopPaymentRef,item)
- 
-//   return batch
-// }
 
-// export const useBatchPayment=(item:Payment,paymentId:string,floor:string,shopNo:string,index:any[])=>{
-// const batch = writeBatch(db);
-
-// const paymentRef = doc(db, "payments",paymentId);
-// const shopPaymentRef = doc(db, "shops",floor,"shops",shopNo,"paymenthistory",paymentId);  
-// const mutation = useFirestoreWriteBatch(batch,{
-// onSuccess: async(data,variables)=>{
-//   console.log("batch hook success === ",data)
-// }
-// });
-// batch.set(paymentRef,item)
-// batch.set(shopPaymentRef,item)
-
-
-// mutation.mutate()
-// }
-
-
+export const insert_dummy_to_cache=(data:any,index:any[],queryClient:QueryClient)=>{
+  queryClient.setQueryData(index,data);
+}
 
 const appendtoCache=async(queryClient:QueryClient,newobj:any,index:any[])=>{
   
@@ -54,9 +30,7 @@ const appendtoCache=async(queryClient:QueryClient,newobj:any,index:any[])=>{
 
   // Optimistically update to the new value
    if(previous){
-    console.log("previous data exists === ",previous)
-
-  //since this is being called on create and update , if the dpaymentId
+    //since this is being called on create and update , if the dpaymentId
   //exists it's spliced out to avoid duplication in cache
 
     queryClient.setQueryData(index, (oldobj:any) => {
@@ -64,7 +38,7 @@ const appendtoCache=async(queryClient:QueryClient,newobj:any,index:any[])=>{
       let final =  [...oldobj, newobj]
       for(let i = 0; i<oldobj.length; i++){
         if(oldobj[i].paymentId === newobj.paymentId){
-         console.log("exists") 
+     
          oldobj.splice(i,1,newobj)
          final = oldobj
         //  console.log("oldobj after splice=== ",oldobj)  
@@ -78,40 +52,39 @@ const appendtoCache=async(queryClient:QueryClient,newobj:any,index:any[])=>{
   }
 }
 
-const removeFromCache=async(queryClient:QueryClient,newobj:any,index:any[])=>{
+// const removeFromCache=async(queryClient:QueryClient,newobj:any,index:any[])=>{
   
-  // console.log("index for the query === ",index)
-  // console.log("new data to append=== ",newobj)
+//   // console.log("index for the query === ",index)
+//   // console.log("new data to append=== ",newobj)
 
-  await queryClient.cancelQueries(index);
-  // Snapshot the previous value
-  const previous = queryClient.getQueryData(index) as any[]
+//   await queryClient.cancelQueries(index);
+//   // Snapshot the previous value
+//   const previous = queryClient.getQueryData(index) as any[]
 
-  // Optimistically update to the new value
-   if(previous){
-    // console.log("previous data exists === ",previous)
+//   // Optimistically update to the new value
+//    if(previous){
+//     // console.log("previous data exists === ",previous)
 
-  //splice out any item in cache with the give payment id on that index 
-  //and return the remaining elements
+//   //splice out any item in cache with the give payment id on that index 
+//   //and return the remaining elements
 
-    queryClient.setQueryData(index, (oldobj:any) => {
-      // console.log("oldobj === ",oldobj)
-      let final =  [oldobj]
-      for(let i = 0; i<oldobj.length; i++){
-        if(oldobj[i].paymentId === newobj.paymentId){
-         console.log("exists") 
-         oldobj.splice(i,1)
-         final = oldobj
+//     queryClient.setQueryData(index, (oldobj:any) => {
+//       // console.log("oldobj === ",oldobj)
+//       let final =  [oldobj]
+//       for(let i = 0; i<oldobj.length; i++){
+//         if(oldobj[i].paymentId === newobj.paymentId){
+//          oldobj.splice(i,1)
+//          final = oldobj
 
-         break
-        }
-      }
+//          break
+//         }
+//       }
 
-      return(final)
-    });
+//       return(final)
+//     });
    
-  }
-}
+//   }
+// }
 
 
 
@@ -184,7 +157,7 @@ export const formatTyme =(time?:tyme|Date)=>{
   
 export const getNextShopNumber=(shops:Shop[])=>{
     //@ts-ignore
-  let num:[number] =[];  
+  let num:[number] =[0];  
    shops.forEach((shop)=>{
   
     if(shop.shopnumber.includes('G'))
@@ -201,4 +174,408 @@ export const getNextShopNumber=(shops:Shop[])=>{
   const nextShopNo = nextNo<10?'0'+nextNo:nextNo
   return {existingShopNo:num,nextShopNo}
   }
+
   
+
+export const dummy_payment=[
+    {
+        "date": {
+            "seconds": 1657395075,
+            "nanoseconds": 417000000
+        },
+        "paymentmode": "cash",
+        "month": "July",
+        "paymentId": "M2-04l5ea8kx3second",
+        "madeBy": "Grass Peach",
+        "payment": "1600",
+        "shopnumber": "M2-04"
+    },
+    {
+        "date": {
+            "seconds": 1657395052,
+            "nanoseconds": 506000000
+        },
+        "paymentmode": "direct_deposit",
+        "month": "July",
+        "paymentId": "M1-02l5ea8aqvfirst",
+        "madeBy": "Grass Peach",
+        "payment": "6400",
+        "shopnumber": "M1-02"
+    },
+    {
+        "date": {
+            "seconds": 1657395052,
+            "nanoseconds": 506000000
+        },
+        "paymentmode": "direct_deposit",
+        "month": "July",
+        "paymentId": "M1-02l5ea8633first",
+        "madeBy": "Grass Peach",
+        "payment": "4400",
+        "shopnumber": "M1-02"
+    },
+    {
+        "date": {
+            "seconds": 1657395022,
+            "nanoseconds": 891000000
+        },
+        "paymentmode": "cash",
+        "month": "July",
+        "paymentId": "M1-01l5ea7pdcfirst",
+        "madeBy": "Grass Peach",
+        "payment": "9700",
+        "shopnumber": "M1-01"
+    },
+    {
+        "date": {
+            "seconds": 1657395022,
+            "nanoseconds": 891000000
+        },
+        "paymentmode": "cash",
+        "month": "July",
+        "paymentId": "M1-01l5ea7h20first",
+        "madeBy": "Grass Peach",
+        "payment": "1300",
+        "shopnumber": "M1-01"
+    },
+    {
+        "date": {
+            "seconds": 1657395000,
+            "nanoseconds": 874000000
+        },
+        "paymentmode": "cash",
+        "month": "July",
+        "paymentId": "M3-03l5ea79bcthird",
+        "madeBy": "Grass Peach",
+        "payment": "1700",
+        "shopnumber": "M3-03"
+    },
+    {
+        "date": {
+            "seconds": 1657395000,
+            "nanoseconds": 874000000
+        },
+        "paymentmode": "cash",
+        "month": "July",
+        "paymentId": "M3-03l5ea734wthird",
+        "madeBy": "Grass Peach",
+        "payment": "6700",
+        "shopnumber": "M3-03"
+    },
+    {
+        "date": {
+            "seconds": 1657394980,
+            "nanoseconds": 74000000
+        },
+        "paymentmode": "cheque",
+        "month": "July",
+        "paymentId": "M3-02l5ea6qqwthird",
+        "madeBy": "Grass Peach",
+        "payment": "6300",
+        "shopnumber": "M3-02"
+    },
+    {
+        "date": {
+            "seconds": 1657394980,
+            "nanoseconds": 74000000
+        },
+        "paymentmode": "cash",
+        "month": "July",
+        "paymentId": "M3-02l5ea6jsothird",
+        "madeBy": "Grass Peach",
+        "payment": "6000",
+        "shopnumber": "M3-02"
+    },
+    {
+        "date": {
+            "seconds": 1657394955,
+            "nanoseconds": 130000000
+        },
+        "paymentmode": "cheque",
+        "month": "July",
+        "paymentId": "M2-01l5ea69mgsecond",
+        "madeBy": "Grass Peach",
+        "payment": "4500",
+        "shopnumber": "M2-01"
+    },
+    {
+        "date": {
+            "seconds": 1657394955,
+            "nanoseconds": 130000000
+        },
+        "paymentmode": "cash",
+        "month": "July",
+        "paymentId": "M2-01l5ea61egsecond",
+        "madeBy": "Grass Peach",
+        "payment": "4000",
+        "shopnumber": "M2-01"
+    },
+    {
+        "date": {
+            "seconds": 1657394935,
+            "nanoseconds": 699000000
+        },
+        "paymentmode": "mpesa",
+        "month": "July",
+        "paymentId": "G-04l5ea5s6oground",
+        "madeBy": "Grass Peach",
+        "payment": "4600",
+        "shopnumber": "G-04"
+    },
+    {
+        "date": {
+            "seconds": 1657394935,
+            "nanoseconds": 699000000
+        },
+        "paymentmode": "direct_deposit",
+        "month": "July",
+        "paymentId": "G-04l5ea5ly8ground",
+        "madeBy": "Grass Peach",
+        "payment": "6000",
+        "shopnumber": "G-04"
+    },
+    {
+        "date": {
+            "seconds": 1657394915,
+            "nanoseconds": 150000000
+        },
+        "paymentmode": "mpesa",
+        "month": "July",
+        "paymentId": "G-03l5ea5ehbground",
+        "madeBy": "Grass Peach",
+        "payment": "7200",
+        "shopnumber": "G-03"
+    },
+    {
+        "date": {
+            "seconds": 1657394915,
+            "nanoseconds": 150000000
+        },
+        "paymentmode": "cash",
+        "month": "July",
+        "paymentId": "G-03l5ea55q0ground",
+        "madeBy": "Grass Peach",
+        "payment": "12000",
+        "shopnumber": "G-03"
+    },
+    {
+        "date": {
+            "seconds": 1657394891,
+            "nanoseconds": 490000000
+        },
+        "paymentmode": "cash",
+        "month": "July",
+        "paymentId": "G-02l5ea4z21ground",
+        "madeBy": "Grass Peach",
+        "payment": "7000",
+        "shopnumber": "G-02"
+    },
+    {
+        "date": {
+            "seconds": 1657394891,
+            "nanoseconds": 490000000
+        },
+        "paymentmode": "cash",
+        "month": "July",
+        "paymentId": "G-02l5ea4swhground",
+        "madeBy": "Grass Peach",
+        "payment": "8000",
+        "shopnumber": "G-02"
+    },
+    {
+        "date": {
+            "seconds": 1657394868,
+            "nanoseconds": 294000000
+        },
+        "paymentmode": "cash",
+        "month": "July",
+        "paymentId": "G-01l5ea4cb5ground",
+        "madeBy": "Grass Peach",
+        "payment": "7000",
+        "shopnumber": "G-01"
+    },
+    {
+        "date": {
+            "seconds": 1657394868,
+            "nanoseconds": 294000000
+        },
+        "paymentmode": "cash",
+        "month": "July",
+        "paymentId": "G-01l5ea473mground",
+        "madeBy": "Grass Peach",
+        "payment": "5000",
+        "shopnumber": "G-01"
+    }
+]
+
+export const dummy_ground_shops=[
+  {
+      "monthlyrent": 10000,
+      "shopfloor": "ground",
+      "shopnumber": "G-01",
+      "date": {
+          "seconds": 1657394635,
+          "nanoseconds": 645000000
+      },
+      "shopname": "def"
+  },
+  {
+      "date": {
+          "seconds": 1657394673,
+          "nanoseconds": 296000000
+      },
+      "shopname": "abc",
+      "monthlyrent": 10000,
+      "shopfloor": "ground",
+      "shopnumber": "G-02"
+  },
+  {
+      "date": {
+          "seconds": 1657394715,
+          "nanoseconds": 40000000
+      },
+      "shopname": "happy",
+      "monthlyrent": 10000,
+      "shopfloor": "ground",
+      "shopnumber": "G-03"
+  },
+  {
+      "date": {
+          "seconds": 1657394723,
+          "nanoseconds": 369000000
+      },
+      "shopname": "left",
+      "monthlyrent": 10000,
+      "shopfloor": "ground",
+      "shopnumber": "G-04"
+  }
+]
+
+export const dummy_first_shops=[
+  {
+      "date": {
+          "seconds": 1657394729,
+          "nanoseconds": 460000000
+      },
+      "shopname": "leafy",
+      "monthlyrent": 10000,
+      "shopfloor": "first",
+      "shopnumber": "M1-01"
+  },
+  {
+      "date": {
+          "seconds": 1657394734,
+          "nanoseconds": 363000000
+      },
+      "shopname": "leg",
+      "monthlyrent": 10000,
+      "shopfloor": "first",
+      "shopnumber": "M1-02"
+  },
+  {
+      "date": {
+          "seconds": 1657394742,
+          "nanoseconds": 421000000
+      },
+      "shopname": "peak",
+      "monthlyrent": 10000,
+      "shopfloor": "first",
+      "shopnumber": "M1-03"
+  },
+  {
+      "date": {
+          "seconds": 1657394747,
+          "nanoseconds": 227000000
+      },
+      "shopname": "snowy",
+      "monthlyrent": 10000,
+      "shopfloor": "first",
+      "shopnumber": "M1-04"
+  }
+]
+
+export const  dummy_second_shops=[
+  {
+      "date": {
+          "seconds": 1657394753,
+          "nanoseconds": 631000000
+      },
+      "shopname": "top",
+      "monthlyrent": 10000,
+      "shopfloor": "second",
+      "shopnumber": "M2-01"
+  },
+  {
+      "date": {
+          "seconds": 1657394757,
+          "nanoseconds": 771000000
+      },
+      "shopname": "blue",
+      "monthlyrent": 10000,
+      "shopfloor": "second",
+      "shopnumber": "M2-02"
+  },
+  {
+      "date": {
+          "seconds": 1657394762,
+          "nanoseconds": 491000000
+      },
+      "shopname": "summer",
+      "monthlyrent": 10000,
+      "shopfloor": "second",
+      "shopnumber": "M2-03"
+  },
+  {
+      "date": {
+          "seconds": 1657394767,
+          "nanoseconds": 315000000
+      },
+      "shopname": "walker",
+      "monthlyrent": 10000,
+      "shopfloor": "second",
+      "shopnumber": "M2-04"
+  }
+]
+
+export const dummy_third_shops=[
+  {
+      "date": {
+          "seconds": 1657394774,
+          "nanoseconds": 139000000
+      },
+      "shopname": "harry",
+      "monthlyrent": 10000,
+      "shopfloor": "third",
+      "shopnumber": "M3-01"
+  },
+  {
+      "date": {
+          "seconds": 1657394779,
+          "nanoseconds": 115000000
+      },
+      "shopname": "leo",
+      "monthlyrent": "14500",
+      "shopfloor": "third",
+      "shopnumber": "M3-02"
+  },
+  {
+      "date": {
+          "seconds": 1657394788,
+          "nanoseconds": 899000000
+      },
+      "shopname": "huko",
+      "monthlyrent": "15000",
+      "shopfloor": "third",
+      "shopnumber": "M3-03"
+  },
+  {
+      "date": {
+          "seconds": 1657394801,
+          "nanoseconds": 650000000
+      },
+      "shopname": "kule",
+      "monthlyrent": "16000",
+      "shopfloor": "third",
+      "shopnumber": "M3-04"
+  }
+]

@@ -8,6 +8,8 @@ import { AddShopCard, ShopCard, ShopFloor } from "./ShopsParts";
 import { ShopForm } from './ShopForm/ShopForm';
 import { FaTimes } from "react-icons/fa";
 import { IconContext } from 'react-icons/lib';
+import { dummy_ground_shops, insert_dummy_to_cache } from './../../utils/sharedutils';
+import { useQueryClient } from 'react-query';
 
 interface ShopsProps {
   user?: User | null;
@@ -27,9 +29,15 @@ export const Shops: React.FC<ShopsProps> = ({ user }) => {
   const shopQuery = useFirestoreQueryData(["shops", floor], shopsRef);
   // console.log("query  ==== ",shopQuery)
   // console.log("shop query ==== ",shopQuery?.data)
-
+  const queryClient = useQueryClient();
   const data = shopQuery.data as Shop[];
-  if (shopQuery.error) {
+  
+  if (shopQuery.error && floor === "ground") {
+   insert_dummy_to_cache(dummy_ground_shops,["shops","ground"],queryClient)
+  }
+
+  if (shopQuery.error ) {
+
     return (
       <div className="w-full h-full flex flex-wrap  text-red-900">
       ERROR LOADING SHOPS {shopQuery.error.message}
@@ -39,6 +47,7 @@ export const Shops: React.FC<ShopsProps> = ({ user }) => {
   if (shopQuery.isLoading) {
     return <div className="w-full h-full flex-center"> loading ..... </div>;
   }
+   
 
   return (
     <div className="w-full h-full flex-col text-white">

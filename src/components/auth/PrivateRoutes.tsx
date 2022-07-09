@@ -1,13 +1,14 @@
 
 // import { Navigate } from 'react-router-dom';
 import { useQueryClient } from "react-query";
+import { insert_dummy_to_cache } from './../../utils/sharedutils';
 const dummy_user={
   "uid": "QzeS3kr8aLJ7gskbpQvSL1TWCLUN",
   "email": "grass.peach.739@example.com",
   "emailVerified": true,
   "displayName": "Grass Peach",
   "isAnonymous": false,
-  "photoURL": "https://picsum.photos/id/433/100/100",
+  "photoURL": "https://picsum.photos/id/1025/100/100",
   "providerData": [
       {
           "providerId": "google.com",
@@ -33,7 +34,8 @@ export const ProtectedRoute = ({ user, children }) => {
   const queryClient = useQueryClient();
 
     if (!user) {
-      queryClient.setQueryData(["user"],dummy_user);
+      insert_dummy_to_cache(dummy_user,["user"],queryClient)
+      // queryClient.setQueryData(["user"],dummy_user);
       // return <Navigate to="/login" replace />;
     }
   
