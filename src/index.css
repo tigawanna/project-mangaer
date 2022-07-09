@@ -5,28 +5,30 @@
 
 * {
   scrollbar-width: thin;
-  scrollbar-color: rgb(141, 141, 167) rgb(161, 160, 157);
+  scrollbar-color: rgb(155, 148, 119) rgb(58, 47, 17);
 }
 
 /* Works on Chrome, Edge, and Safari */
 *::-webkit-scrollbar {
-  width: 12px;
-  height: 10px;
+  width: 7px;
+  height: 7px;
 }
 
 *::-webkit-scrollbar-track {
-  background: rgb(110, 109, 107);
+  background: rgb(134, 126, 110);
 }
 
 *::-webkit-scrollbar-thumb {
-  background-color: rgb(76, 76, 78);
+  background-color: rgb(209, 162, 61);
   border-radius: 20px;
 }
 
 
 
 
-
+.center-flex{
+  @apply justify-center items-center
+}
 
 .flex-center{
 @apply flex justify-center items-center
