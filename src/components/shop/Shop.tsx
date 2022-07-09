@@ -34,7 +34,7 @@ export const Shop: React.FC<ShopProps> = ({ user }) => {
   const [input, setInput] = useState<Payment>({
     date: new Date(),
     shopnumber:shop.shopnumber,
-    payment:0,
+    payment:1000,
     paymentId:"",
     madeBy:"",
     month:getmonth,
@@ -53,14 +53,7 @@ export const Shop: React.FC<ShopProps> = ({ user }) => {
       setError({ name: "payment", error: "payment seems too low, 1k minimun" });
       return false      
     }
-    // if(current.paymentmode!=="cash_deposit"||"cheque"||"mpesa"||"direct_transfer"){
-    //   setError({ name: "paymentmode", error: "payment mode unrecognized" });
-    //   return false      
-    // }
-    // if(current.paymentmode!=="cash_deposit"){
-    //   setError({ name: "paymentmode", error: "payment mode unrecognized" });
-    //   return false      
-    // }
+ 
 
     setError({ name: "", error: "" });
     return true;
@@ -156,7 +149,7 @@ export const Shop: React.FC<ShopProps> = ({ user }) => {
             }}
           >
             <FaRegEdit onClick={() => setUpdate(!update)} />
-            {!open ? (
+            {!formopen ? (
               <FaPlus onClick={() => setFormOpen(!formopen)} />
             ) : (
               <FaTimes onClick={() => setFormOpen(!formopen)} />
@@ -179,6 +172,7 @@ export const Shop: React.FC<ShopProps> = ({ user }) => {
       <div className="w-full h-fit bg-slate-500 overfloe-x-hidden">
       <ShopDetails shop={shop} />
       </div>
+  
       {formopen?<SharedPaymentForm
        formopen={formopen}
        input={input}
@@ -187,6 +181,7 @@ export const Shop: React.FC<ShopProps> = ({ user }) => {
        handleSubmit={handleTheSubmit}
        error={error}
        />:null}
+
       <div className="w-full h-fit z-40 overflow-x-scroll lg:overflow-x-hidden flex justify-center">
         <div className="absolute w-[99%] bg-white ">
           <TheTable

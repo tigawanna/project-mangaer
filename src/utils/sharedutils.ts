@@ -46,13 +46,15 @@ export const getShopPaymentRef=(paymentId:string,floor:string,shopNo:string)=>{
 const appendtoCache=async(queryClient:QueryClient,newobj:any,index:any[])=>{
   
   console.log("index for the query === ",index)
+  console.log("new data to append=== ",newobj)
+
   await queryClient.cancelQueries(index);
   // Snapshot the previous value
   const previous = queryClient.getQueryData(index);
-  console.log("previous data in the query cahe vs new === ",previous,newobj)
+
   // Optimistically update to the new value
    if(previous){
-    console.log("previous data in the query cahe vs new === ",previous,newobj)
+    console.log("previous data exists === ",previous)
     //@ts-ignore
     queryClient.setQueryData(index, (oldobj) => [...oldobj, newobj]);
    
@@ -135,7 +137,8 @@ export const getNextShopNumber=(shops:Shop[])=>{
     } 
    })
 
-  const nextShopNo= num.reduce(function (p, v) {return ( p > v ? p : v );})+1
+  const nextNo= num.reduce(function (p, v) {return ( p > v ? p : v );})+1
+  const nextShopNo = nextNo<10?'0'+nextNo:nextNo
   return {existingShopNo:num,nextShopNo}
   }
   

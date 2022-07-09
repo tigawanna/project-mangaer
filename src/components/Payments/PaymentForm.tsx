@@ -36,12 +36,12 @@ export const PaymentForm: React.FC<PaymentFormProps> = ({ open,setOpen,user,quer
  
   const [error, setError] = useState({ name: "", error: "" });
   
-  console.log("error ==== ",error)
+  
 
   const [input, setInput] = useState<Payment>({
     date: new Date(),
     shopnumber:"G-01",
-    payment:0,
+    payment:1000,
     paymentId:"",
     madeBy:"",
     month:getmonth,

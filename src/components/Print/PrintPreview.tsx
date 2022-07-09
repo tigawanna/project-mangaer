@@ -19,11 +19,12 @@ export const PrintPreview = ({user}:PrintPreviewTypes) => {
 
   const { state } = useLocation();
   const props=state as TheTableProps
-  console.log("bussin in props ====",props)
+  
 
   return (
     <div>
       <ReactToPrint
+
         trigger={() => <button className='p-2 bg-slate-600 text-white fixed top-[12%] left-[50%] z-50'><FaPrint/></button>}
         content={() => componentRef.current}
       />
