@@ -73,7 +73,7 @@ export const Payment: React.FC<paymentProps> = ({ user }) => {
   
   });
 
-  if (paymentQuery.error && month === getmonth) {
+  if (!paymentQuery.data && month === getmonth) {
     insert_dummy_to_cache(dummy_payment,["payments",getmonth],queryClient)
    }
 

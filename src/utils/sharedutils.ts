@@ -103,11 +103,13 @@ const appendtoCache=async(queryClient:QueryClient,newobj:any,index:any[])=>{
 
    batch.commit().then((stuff)=>{
 
-   appendtoCache(queryClient,item,payment_index)
-   appendtoCache(queryClient,item,shoppayment_index)
+  //  appendtoCache(queryClient,item,payment_index)
+  //  appendtoCache(queryClient,item,shoppayment_index)
    
 
   })
+  appendtoCache(queryClient,item,payment_index)
+  appendtoCache(queryClient,item,shoppayment_index)
    .catch((stuff)=>{console.log("error writing batch ===",stuff)})
   }
 
@@ -579,3 +581,156 @@ export const dummy_third_shops=[
       "shopnumber": "M3-04"
   }
 ]
+
+
+export const dummy_g01=[
+
+  {
+      "date": {
+          "seconds": 1657394980,
+          "nanoseconds": 74000000
+      },
+      "paymentmode": "cash",
+      "month": "July",
+      "paymentId": "M3-02l5ea6jsothird",
+      "madeBy": "Grass Peach",
+      "payment": "6000",
+      "shopnumber": "G-02"
+  },
+  {
+      "date": {
+          "seconds": 1657394955,
+          "nanoseconds": 130000000
+      },
+      "paymentmode": "cheque",
+      "month": "July",
+      "paymentId": "M2-01l5ea69mgsecond",
+      "madeBy": "Grass Peach",
+      "payment": "4500",
+      "shopnumber": "G-01"
+  },
+
+
+
+  {
+      "date": {
+          "seconds": 1657394868,
+          "nanoseconds": 294000000
+      },
+      "paymentmode": "cash",
+      "month": "July",
+      "paymentId": "G-01l5ea4cb5ground",
+      "madeBy": "Grass Peach",
+      "payment": "7000",
+      "shopnumber": "G-01"
+  },
+  {
+      "date": {
+          "seconds": 1657394868,
+          "nanoseconds": 294000000
+      },
+      "paymentmode": "cash",
+      "month": "July",
+      "paymentId": "G-01l5ea473mground",
+      "madeBy": "Grass Peach",
+      "payment": "5000",
+      "shopnumber": "G-01"
+  }
+]
+
+export const dummy_g02=[
+  {
+    "date": {
+        "seconds": 1657394891,
+        "nanoseconds": 490000000
+    },
+    "paymentmode": "cash",
+    "month": "July",
+    "paymentId": "G-02l5ea4z21ground",
+    "madeBy": "Grass Peach",
+    "payment": "7000",
+    "shopnumber": "G-02"
+},
+{
+    "date": {
+        "seconds": 1657394891,
+        "nanoseconds": 490000000
+    },
+    "paymentmode": "cash",
+    "month": "July",
+    "paymentId": "G-02l5ea4swhground",
+    "madeBy": "Grass Peach",
+    "payment": "8000",
+    "shopnumber": "G-02"
+}
+]
+
+export const dummy_g03=[
+  {
+    "date": {
+        "seconds": 1657394891,
+        "nanoseconds": 490000000
+    },
+    "paymentmode": "cash",
+    "month": "July",
+    "paymentId": "G-02l5ea4z21ground",
+    "madeBy": "Grass Peach",
+    "payment": "7000",
+    "shopnumber": "G-03"
+},
+{
+    "date": {
+        "seconds": 1657394891,
+        "nanoseconds": 490000000
+    },
+    "paymentmode": "cash",
+    "month": "July",
+    "paymentId": "G-02l5ea4swhground",
+    "madeBy": "Grass Peach",
+    "payment": "8000",
+    "shopnumber": "G-03"
+}
+]
+
+export const dummy_g04=[
+  {
+    "date": {
+        "seconds": 1657394891,
+        "nanoseconds": 490000000
+    },
+    "paymentmode": "cash",
+    "month": "July",
+    "paymentId": "G-02l5ea4z21ground",
+    "madeBy": "Grass Peach",
+    "payment": "7000",
+    "shopnumber": "G-04"
+},
+{
+    "date": {
+        "seconds": 1657394891,
+        "nanoseconds": 490000000
+    },
+    "paymentmode": "cash",
+    "month": "July",
+    "paymentId": "G-02l5ea4swhground",
+    "madeBy": "Grass Peach",
+    "payment": "8000",
+    "shopnumber": "G-04"
+}
+]
+
+
+export const get_dummy_shop_payment =(shopnumber:string)=>{
+if(shopnumber === "G-01"){
+  return dummy_g01
+}
+if(shopnumber === "G-02"){
+  return dummy_g02
+}
+if(shopnumber === "G-03"){
+  return dummy_g03
+}
+if(shopnumber === "G-04"){
+  return dummy_g04
+}
+}

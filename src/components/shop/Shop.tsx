@@ -12,10 +12,11 @@ import { header } from "../../utils/shop-table-yars";
 import { IconContext } from "react-icons";
 import { FaRegEdit, FaPrint, FaTimes } from "react-icons/fa";
 import { FaPlus } from "react-icons/fa";
-import { setPayment,deletePayment } from "../../utils/sharedutils";
+import { setPayment,deletePayment, dummy_g01, get_dummy_shop_payment } from "../../utils/sharedutils";
 import { getmonth, handleChange, handleSubmit } from './../../utils/paymentutils';
 import { SharedPaymentForm } from "../Shared/SharedPaymentForm";
 import { useQueryClient} from 'react-query';
+import { insert_dummy_to_cache} from './../../utils/sharedutils';
 
 
 interface ShopProps {
@@ -116,8 +117,12 @@ export const Shop: React.FC<ShopProps> = ({ user }) => {
   );
 
 
+ const payments = paymentQuery.data as Payment[];
 
-  const payments = paymentQuery.data as Payment[];
+ if(!payments && shop.shopnumber && shop.shopfloor === "ground"){
+  insert_dummy_to_cache(get_dummy_shop_payment(shop.shopnumber),
+  ["payment", shop?.shopfloor, shop?.shopnumber],queryClient)
+ }
 
   if (paymentQuery.error) {
     return (

@@ -31,8 +31,8 @@ export const Shops: React.FC<ShopsProps> = ({ user }) => {
   // console.log("shop query ==== ",shopQuery?.data)
   const queryClient = useQueryClient();
   const data = shopQuery.data as Shop[];
-  
-  if (shopQuery.error && floor === "ground") {
+
+  if (!shopQuery.data && floor === "ground") {
    insert_dummy_to_cache(dummy_ground_shops,["shops","ground"],queryClient)
   }
 
