@@ -45,28 +45,45 @@ export const getShopPaymentRef=(paymentId:string,floor:string,shopNo:string)=>{
 
 const appendtoCache=async(queryClient:QueryClient,newobj:any,index:any[])=>{
   
-  console.log("index for the query === ",index)
-  console.log("new data to append=== ",newobj)
+  // console.log("index for the query === ",index)
+  // console.log("new data to append=== ",newobj)
 
   await queryClient.cancelQueries(index);
   // Snapshot the previous value
-  const previous = queryClient.getQueryData(index);
+  const previous = queryClient.getQueryData(index) as any[]
 
   // Optimistically update to the new value
    if(previous){
     console.log("previous data exists === ",previous)
+
+
     //@ts-ignore
-    queryClient.setQueryData(index, (oldobj) => [...oldobj, newobj]);
+    queryClient.setQueryData(index, (oldobj:any) => {
+      console.log("oldobj === ",oldobj)
+      let final =  [...oldobj, newobj]
+      for(let i = 0; i<oldobj.length; i++){
+        if(oldobj[i].paymentId === newobj.paymentId){
+         console.log("exists") 
+         oldobj.splice(i,1,newobj)
+         final = oldobj
+         console.log("oldobj after splice=== ",oldobj)  
+         break
+        }
+      }
+      
+      return(final)
+    });
    
   }
 }
 
 
 
-export  const setPayment=(item:Payment,paymentId:string,floor:string,shopNo:string,queryClient:QueryClient)=>{
+  export  const setPayment=(item:Payment,paymentId:string,floor:string,shopNo:string,queryClient:QueryClient)=>{
    const paymentRef = doc(db, "payments",paymentId);
    const shopPaymentRef = doc(db, "shops",floor,"shops",shopNo,"paymenthistory",paymentId);
 
+  //  console.log("item when updating",item)
    //query indexes to manually resolve cache
    const payment_index=["payments",item.month]
    const shoppayment_index =["payment", floor, item.shopnumber]
@@ -74,6 +91,7 @@ export  const setPayment=(item:Payment,paymentId:string,floor:string,shopNo:stri
    const batch = writeBatch(db);
    batch.set(paymentRef,item)
    batch.set(shopPaymentRef,item)
+
    batch.commit().then((stuff)=>{
 
    appendtoCache(queryClient,item,payment_index)

@@ -19,7 +19,7 @@ import { PrintPreview } from './components/Print/PrintPreview';
 
 function App() {
   const query = useAuthUser("user", auth);
-  console.log("user present query   ====  ", query.data);
+  // console.log("user present query   ====  ", query.data);
 
 
   const user = query.data;

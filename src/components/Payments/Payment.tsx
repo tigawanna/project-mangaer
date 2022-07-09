@@ -11,7 +11,7 @@ import { PaymentForm } from "./PaymentForm";
 import { User } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { monthindex, months,getMonthIndex, getmonth } from "../../utils/paymentutils";
-import { setPayment} from './../../utils/sharedutils';
+import { deletePayment, setPayment} from './../../utils/sharedutils';
 import { findFloor } from './../../utils/other/util';
 
 import { useQueryClient} from 'react-query';
@@ -51,9 +51,10 @@ export const Payment: React.FC<paymentProps> = ({ user }) => {
     setPayment(item, current.paymentId,findFloor(current.shopnumber),current.shopnumber,queryClient);
   };
 
-  const deleteRow = (current: any) => {
+  const deleteRow = (current:PaymentType) => {
     // console.log("delteing current ,",current)
-    // setError({name:"name",error:"not john"})
+    setError({name:"name",error:"not john"})
+    deletePayment(current.paymentId,findFloor(current.shopnumber),current.shopnumber)
   };
 
   const clearError = () => {
@@ -88,7 +89,7 @@ export const Payment: React.FC<paymentProps> = ({ user }) => {
 
   const payments = paymentQuery.data as PaymentType[];
  
- console.log("paymets being sent to table ====== ",payments)
+//  console.log("paymets being sent to table ====== ",payments)
 
  return (
     <div className="w-full h-[85%] overflow-y-hidden absolute">

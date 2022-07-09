@@ -11,7 +11,7 @@ error:{name:string,error:string}
 }
 
 export const SharedPaymentForm: React.FC<SharedPaymentFormProps> = (
-    {input,error,handleChange,handleSubmit,formopen,setFormOpen}) => {
+{input,error,handleChange,handleSubmit,formopen,setFormOpen}) => {
 return (
  <div>
 {formopen?<div className="w-[90%] md:w-[40%] h-[60%] flex-center fixed left-[5%] md:left-[30%] top-[20%] z-20">

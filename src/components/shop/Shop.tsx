@@ -15,8 +15,6 @@ import { FaPlus } from "react-icons/fa";
 import { setPayment,deletePayment } from "../../utils/sharedutils";
 import { getmonth, handleChange, handleSubmit } from './../../utils/paymentutils';
 import { SharedPaymentForm } from "../Shared/SharedPaymentForm";
-import { findFloor } from './../../utils/other/util';
-
 import { useQueryClient} from 'react-query';
 
 
@@ -82,7 +80,7 @@ export const Shop: React.FC<ShopProps> = ({ user }) => {
     deletePayment(current.paymentId, shop.shopfloor, shop.shopnumber);
   };
 
-  const floor = findFloor(shop.shopnumber)
+  const floor = shop.shopfloor
 
   const handleTheChange=(e:any)=>{
     handleChange({e,input,setInput})
@@ -110,7 +108,7 @@ export const Shop: React.FC<ShopProps> = ({ user }) => {
     orderBy("date", "desc")
   );
  
-  console.log("shop payment dapenadncies ===== ",shop)
+  // console.log("shop payment dapenadncies ===== ",shop)
 
   const paymentQuery = useFirestoreQueryData(
     ["payment", shop?.shopfloor, shop?.shopnumber],
@@ -133,7 +131,7 @@ export const Shop: React.FC<ShopProps> = ({ user }) => {
     return <div className="w-full h-full flex-center"> loading ..... </div>;
   }
 
-  console.log("shop payments === ",payments);
+  // console.log("shop payments === ",payments);
 
   return (
     <div className="h-full w-full bg-slate-600 overflow-y-hidden">
