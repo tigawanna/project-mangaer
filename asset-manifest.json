@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/project-mangaer/static/css/main.8aac0422.css",
-    "main.js": "/project-mangaer/static/js/main.3acf7c58.js",
+    "main.css": "/project-mangaer/static/css/main.d4877594.css",
+    "main.js": "/project-mangaer/static/js/main.0ca4963e.js",
     "static/js/787.79741077.chunk.js": "/project-mangaer/static/js/787.79741077.chunk.js",
     "index.html": "/project-mangaer/index.html",
-    "main.8aac0422.css.map": "/project-mangaer/static/css/main.8aac0422.css.map",
-    "main.3acf7c58.js.map": "/project-mangaer/static/js/main.3acf7c58.js.map",
+    "main.d4877594.css.map": "/project-mangaer/static/css/main.d4877594.css.map",
+    "main.0ca4963e.js.map": "/project-mangaer/static/js/main.0ca4963e.js.map",
     "787.79741077.chunk.js.map": "/project-mangaer/static/js/787.79741077.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.8aac0422.css",
-    "static/js/main.3acf7c58.js"
+    "static/css/main.d4877594.css",
+    "static/js/main.0ca4963e.js"
   ]
 }
