@@ -1,6 +1,5 @@
 import { User} from 'firebase/auth';
-import { doc } from 'firebase/firestore';
-import { db } from '../../firebase/firebaseConfig';
+
 
 
 

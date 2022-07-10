@@ -6,7 +6,7 @@ interface ShopWidgetsProps {
 
 }
 
-export const ShopWidgets: React.FC<ShopWidgetsProps> = ({}) => {
+export const ShopWidgets: React.FC<ShopWidgetsProps> = () => {
 return (
  <div className=''>
 

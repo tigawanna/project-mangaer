@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { collection, limit, orderBy, query,where } from "firebase/firestore";
+import { collection,orderBy, query} from "firebase/firestore";
 import { useFirestoreQueryData } from "@react-query-firebase/firestore";
 import { db } from "../../firebase/firebaseConfig";
 import { TheTable } from "table-for-react";

@@ -453,134 +453,134 @@ export const dummy_ground_shops=[
   }
 ]
 
-export const dummy_first_shops=[
-  {
-      "date": {
-          "seconds": 1657394729,
-          "nanoseconds": 460000000
-      },
-      "shopname": "leafy",
-      "monthlyrent": 10000,
-      "shopfloor": "first",
-      "shopnumber": "M1-01"
-  },
-  {
-      "date": {
-          "seconds": 1657394734,
-          "nanoseconds": 363000000
-      },
-      "shopname": "leg",
-      "monthlyrent": 10000,
-      "shopfloor": "first",
-      "shopnumber": "M1-02"
-  },
-  {
-      "date": {
-          "seconds": 1657394742,
-          "nanoseconds": 421000000
-      },
-      "shopname": "peak",
-      "monthlyrent": 10000,
-      "shopfloor": "first",
-      "shopnumber": "M1-03"
-  },
-  {
-      "date": {
-          "seconds": 1657394747,
-          "nanoseconds": 227000000
-      },
-      "shopname": "snowy",
-      "monthlyrent": 10000,
-      "shopfloor": "first",
-      "shopnumber": "M1-04"
-  }
-]
+// export const dummy_first_shops=[
+//   {
+//       "date": {
+//           "seconds": 1657394729,
+//           "nanoseconds": 460000000
+//       },
+//       "shopname": "leafy",
+//       "monthlyrent": 10000,
+//       "shopfloor": "first",
+//       "shopnumber": "M1-01"
+//   },
+//   {
+//       "date": {
+//           "seconds": 1657394734,
+//           "nanoseconds": 363000000
+//       },
+//       "shopname": "leg",
+//       "monthlyrent": 10000,
+//       "shopfloor": "first",
+//       "shopnumber": "M1-02"
+//   },
+//   {
+//       "date": {
+//           "seconds": 1657394742,
+//           "nanoseconds": 421000000
+//       },
+//       "shopname": "peak",
+//       "monthlyrent": 10000,
+//       "shopfloor": "first",
+//       "shopnumber": "M1-03"
+//   },
+//   {
+//       "date": {
+//           "seconds": 1657394747,
+//           "nanoseconds": 227000000
+//       },
+//       "shopname": "snowy",
+//       "monthlyrent": 10000,
+//       "shopfloor": "first",
+//       "shopnumber": "M1-04"
+//   }
+// ]
 
-export const  dummy_second_shops=[
-  {
-      "date": {
-          "seconds": 1657394753,
-          "nanoseconds": 631000000
-      },
-      "shopname": "top",
-      "monthlyrent": 10000,
-      "shopfloor": "second",
-      "shopnumber": "M2-01"
-  },
-  {
-      "date": {
-          "seconds": 1657394757,
-          "nanoseconds": 771000000
-      },
-      "shopname": "blue",
-      "monthlyrent": 10000,
-      "shopfloor": "second",
-      "shopnumber": "M2-02"
-  },
-  {
-      "date": {
-          "seconds": 1657394762,
-          "nanoseconds": 491000000
-      },
-      "shopname": "summer",
-      "monthlyrent": 10000,
-      "shopfloor": "second",
-      "shopnumber": "M2-03"
-  },
-  {
-      "date": {
-          "seconds": 1657394767,
-          "nanoseconds": 315000000
-      },
-      "shopname": "walker",
-      "monthlyrent": 10000,
-      "shopfloor": "second",
-      "shopnumber": "M2-04"
-  }
-]
+// export const  dummy_second_shops=[
+//   {
+//       "date": {
+//           "seconds": 1657394753,
+//           "nanoseconds": 631000000
+//       },
+//       "shopname": "top",
+//       "monthlyrent": 10000,
+//       "shopfloor": "second",
+//       "shopnumber": "M2-01"
+//   },
+//   {
+//       "date": {
+//           "seconds": 1657394757,
+//           "nanoseconds": 771000000
+//       },
+//       "shopname": "blue",
+//       "monthlyrent": 10000,
+//       "shopfloor": "second",
+//       "shopnumber": "M2-02"
+//   },
+//   {
+//       "date": {
+//           "seconds": 1657394762,
+//           "nanoseconds": 491000000
+//       },
+//       "shopname": "summer",
+//       "monthlyrent": 10000,
+//       "shopfloor": "second",
+//       "shopnumber": "M2-03"
+//   },
+//   {
+//       "date": {
+//           "seconds": 1657394767,
+//           "nanoseconds": 315000000
+//       },
+//       "shopname": "walker",
+//       "monthlyrent": 10000,
+//       "shopfloor": "second",
+//       "shopnumber": "M2-04"
+//   }
+// ]
 
-export const dummy_third_shops=[
-  {
-      "date": {
-          "seconds": 1657394774,
-          "nanoseconds": 139000000
-      },
-      "shopname": "harry",
-      "monthlyrent": 10000,
-      "shopfloor": "third",
-      "shopnumber": "M3-01"
-  },
-  {
-      "date": {
-          "seconds": 1657394779,
-          "nanoseconds": 115000000
-      },
-      "shopname": "leo",
-      "monthlyrent": "14500",
-      "shopfloor": "third",
-      "shopnumber": "M3-02"
-  },
-  {
-      "date": {
-          "seconds": 1657394788,
-          "nanoseconds": 899000000
-      },
-      "shopname": "huko",
-      "monthlyrent": "15000",
-      "shopfloor": "third",
-      "shopnumber": "M3-03"
-  },
-  {
-      "date": {
-          "seconds": 1657394801,
-          "nanoseconds": 650000000
-      },
-      "shopname": "kule",
-      "monthlyrent": "16000",
-      "shopfloor": "third",
-      "shopnumber": "M3-04"
-  }
-]
+// export const dummy_third_shops=[
+//   {
+//       "date": {
+//           "seconds": 1657394774,
+//           "nanoseconds": 139000000
+//       },
+//       "shopname": "harry",
+//       "monthlyrent": 10000,
+//       "shopfloor": "third",
+//       "shopnumber": "M3-01"
+//   },
+//   {
+//       "date": {
+//           "seconds": 1657394779,
+//           "nanoseconds": 115000000
+//       },
+//       "shopname": "leo",
+//       "monthlyrent": "14500",
+//       "shopfloor": "third",
+//       "shopnumber": "M3-02"
+//   },
+//   {
+//       "date": {
+//           "seconds": 1657394788,
+//           "nanoseconds": 899000000
+//       },
+//       "shopname": "huko",
+//       "monthlyrent": "15000",
+//       "shopfloor": "third",
+//       "shopnumber": "M3-03"
+//   },
+//   {
+//       "date": {
+//           "seconds": 1657394801,
+//           "nanoseconds": 650000000
+//       },
+//       "shopname": "kule",
+//       "monthlyrent": "16000",
+//       "shopfloor": "third",
+//       "shopnumber": "M3-04"
+//   }
+// ]
 
 
 export const dummy_g01=[
